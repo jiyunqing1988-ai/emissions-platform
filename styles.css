@@ -1,0 +1,5261 @@
+/* Hallmark · pre-emit critique: P5 H5 E4 S5 R5 V4 · macrostructure: Workbench · tone: utilitarian editorial · anchor hue: morandi green · contrast: pass · responsive: pass */
+@import url("./tokens.css?v=data-20260726-broadsheet-91");
+
+:root {
+  --ink: var(--color-ink);
+  --muted: var(--color-muted);
+  --line: var(--color-rule);
+  --paper: var(--color-paper);
+  --panel: var(--color-panel);
+  --teal: var(--color-accent);
+  --amber: var(--color-accent-2);
+  --coral: var(--color-accent-3);
+  --blue: var(--color-accent);
+  --soft: var(--color-paper-2);
+  --home-max: 1680px;
+  --section-pad: clamp(56px, 7vw, 112px);
+  --hero-height: clamp(520px, 68vh, 680px);
+  font-family: var(--font-body);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  overflow-x: clip;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 3px;
+}
+
+button:disabled,
+a[aria-disabled="true"],
+input:disabled,
+select:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-lg);
+  min-height: 80px;
+  padding: 0 var(--space-lg) 0 0;
+  background: var(--color-header);
+  box-shadow: 0 1px 0 var(--color-shadow-soft);
+}
+
+.header-brand {
+  display: inline-flex;
+  flex: 0 1 auto;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+  height: 80px;
+  padding-left: var(--space-lg);
+  text-decoration: none;
+}
+
+.header-brand img {
+  display: block;
+  /* Transparent white mark now: size by height, let width follow the intrinsic
+     256:230 ratio so it never distorts when the asset changes again. */
+  width: auto;
+  height: 42px;
+}
+
+.brand-text {
+  display: grid;
+  gap: var(--space-2xs);
+  min-width: 0;
+  color: var(--color-header-ink);
+}
+
+.brand-text strong {
+  font-family: var(--font-display);
+  font-size: clamp(19px, 1.75vw, 25px);
+  font-weight: 800;
+  line-height: 1.12;
+  letter-spacing: 0;
+  white-space: nowrap;
+}
+
+.brand-text small {
+  color: var(--color-header-muted);
+  font-size: clamp(10px, 0.92vw, 12.5px);
+  font-weight: 700;
+  letter-spacing: 0;
+  white-space: nowrap;
+}
+
+.utility-link:active,
+.head-actions button:active,
+.back-link:active,
+.unit-control button:active,
+.category-link:active,
+.all-factors:active,
+.scope-heading:active {
+  transform: translateY(1px);
+}
+
+.account-avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  color: var(--color-accent-ink);
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.account-avatar.lg {
+  width: 44px;
+  height: 44px;
+  font-size: 18px;
+}
+
+.account-menu {
+  display: grid;
+  padding: 8px;
+}
+
+.account-item {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 2px 10px;
+  min-height: var(--m-tap, 44px);
+  border: 0;
+  border-radius: var(--radius-control);
+  padding: 10px 12px;
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+  text-align: left;
+}
+
+.account-item span {
+  font-weight: 800;
+}
+
+.account-item em {
+  grid-column: 1;
+  color: var(--muted);
+  font-size: 12px;
+  font-style: normal;
+}
+
+.account-item strong {
+  grid-row: 1 / span 2;
+  grid-column: 2;
+  color: var(--teal);
+  font-size: 15px;
+}
+
+.account-item.primary span {
+  color: var(--teal);
+}
+
+.account-item.danger {
+  margin-top: 4px;
+  border-top: 1px solid var(--line);
+  border-radius: 0 0 var(--radius-control) var(--radius-control);
+  padding-top: 12px;
+}
+
+.account-item.danger span {
+  color: var(--color-danger);
+}
+
+@media (hover: hover) {
+  .account-item:hover {
+    background: var(--color-paper-2);
+  }
+}
+
+/* Handheld only — the desktop header already carries this navigation. */
+.tab-bar {
+  display: none;
+}
+
+/* ---- 我的 — centred identity, then a plain list. No page title above it. ---- */
+.account-page {
+  max-width: var(--read-max);
+  margin-inline: auto;
+}
+
+.account-id {
+  display: grid;
+  justify-items: center;
+  gap: 6px;
+  padding: clamp(24px, 4vw, 48px) 0 clamp(28px, 4vw, 44px);
+  border-bottom: 1px solid var(--color-rule);
+  text-align: center;
+}
+
+.account-avatar.xl {
+  width: 76px;
+  height: 76px;
+  margin-bottom: 10px;
+  font-size: 30px;
+}
+
+.account-id h3 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(24px, 2.6vw, 34px);
+  font-weight: 800;
+  letter-spacing: 0;
+  overflow-wrap: anywhere;
+}
+
+.account-id p {
+  max-width: 34ch;
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.account-login {
+  min-height: 48px;
+  margin-top: 18px;
+  padding: 0 30px;
+  border-radius: 2px;
+}
+
+.account-menu.page {
+  padding: 0;
+  background: transparent;
+}
+
+.account-menu.page .account-item {
+  border-radius: 0;
+  border-bottom: 1px solid var(--color-rule);
+  padding: 18px 4px;
+}
+
+.account-menu.page .account-item:last-child {
+  border-bottom: 0;
+}
+
+.account-menu.page .account-item.danger {
+  margin-top: 0;
+}
+
+.auth-switch {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: center;
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.auth-switch button {
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: var(--teal);
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.favorite-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-control);
+  padding: 0 16px;
+  background: var(--color-panel);
+  color: var(--color-ink-2);
+  cursor: pointer;
+  font-weight: 800;
+}
+
+.favorite-toggle.saved {
+  border-color: var(--color-accent-2);
+  background: color-mix(in oklch, var(--color-accent-2) 14%, var(--color-panel));
+  color: var(--color-ink);
+}
+
+.profile-list,
+.settings-list {
+  display: grid;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+}
+
+.profile-row {
+  display: grid;
+  grid-template-columns: minmax(120px, 30%) minmax(0, 1fr);
+  gap: 16px;
+  align-items: baseline;
+  padding: 13px 16px;
+  border-bottom: 1px solid var(--line);
+  background: var(--color-panel);
+}
+
+.profile-list .profile-row:last-child,
+.settings-list .settings-row:last-child {
+  border-bottom: 0;
+}
+
+.profile-row span {
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.profile-row strong {
+  overflow-wrap: anywhere;
+}
+
+.settings-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 16px;
+  align-items: center;
+  padding: 16px;
+  border-bottom: 1px solid var(--line);
+  background: var(--color-panel);
+}
+
+.settings-copy strong {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 16px;
+}
+
+.settings-copy p {
+  max-width: 52ch;
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.settings-options {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: flex-end;
+}
+
+.settings-options button {
+  min-height: 36px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  padding: 0 14px;
+  background: var(--color-panel);
+  color: var(--color-ink-2);
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.settings-options button.active {
+  border-color: var(--teal);
+  background: var(--teal);
+  color: var(--color-accent-ink);
+}
+
+/* 系统设置 → 列表中显示备注 */
+body.hide-notes th[data-col="notes"],
+body.hide-notes td[data-col="notes"] {
+  display: none;
+}
+
+.header-nav {
+  display: inline-flex;
+  flex: 0 0 auto;
+  gap: 4px;
+  margin-left: auto;
+}
+
+.header-nav button {
+  min-height: 40px;
+  border: 0;
+  border-radius: var(--radius-control);
+  padding: 0 14px;
+  background: transparent;
+  color: var(--color-header-muted);
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.header-nav button.active {
+  box-shadow: inset 0 -2px 0 var(--mark-s1);
+  color: var(--color-header-ink);
+}
+
+@media (hover: hover) {
+  .header-nav button:hover {
+    background: var(--color-header-hover);
+    color: var(--color-header-ink);
+  }
+}
+
+.header-account {
+  position: relative;
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  margin-left: var(--space-sm);
+  padding-left: var(--space-sm);
+  border-left: 1px solid var(--color-header-rule);
+}
+
+/* ---- Account popover ----
+   Hangs off the header button. The handheld layout hides the header entirely
+   and reaches all of this from the 我的 tab, so this never renders on a phone. */
+.account-pop {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  z-index: 30;
+  width: 268px;
+  padding: 6px 0;
+  border: 1px solid var(--color-rule);
+  border-radius: var(--radius-card);
+  background: var(--color-panel);
+  box-shadow: 0 12px 32px var(--color-shadow-soft);
+  color: var(--color-ink);
+  text-align: left;
+}
+
+.account-pop-id {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 6px;
+  padding: 10px 16px 14px;
+  border-bottom: 1px solid var(--color-rule);
+}
+
+.header-account .account-pop-id strong {
+  display: block;
+  color: var(--color-ink);
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.account-pop-id em {
+  display: block;
+  margin-top: 2px;
+  color: var(--color-muted-2);
+  font-size: 12px;
+  font-style: normal;
+}
+
+/* `.header-account button` sets the header's near-white ink and out-specifies a
+   plain `color: inherit`, so every rule that paints text in here is scoped
+   through .header-account to beat it. Without this the labels were white on the
+   white popover. */
+.header-account .account-pop-item {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-rows: auto auto;
+  width: 100%;
+  min-height: 44px;
+  border: 0;
+  padding: 8px 16px;
+  background: none;
+  color: var(--color-ink);
+  cursor: pointer;
+  text-align: left;
+}
+
+/* Explicit areas: auto-placement put the note beside the label instead of under
+   it, because the count is pre-placed in column 2. */
+.header-account .account-pop-item span {
+  grid-area: 1 / 1;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.header-account .account-pop-item em {
+  grid-area: 2 / 1;
+  color: var(--color-muted-2);
+  font-size: 12px;
+  font-style: normal;
+}
+
+.header-account .account-pop-item strong {
+  grid-area: 1 / 2 / 3 / 3;
+  align-self: center;
+  color: var(--color-accent);
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+.header-account .account-pop-item.docs,
+.header-account .account-pop-item.danger {
+  margin-top: 6px;
+  border-top: 1px solid var(--color-rule);
+}
+
+.header-account .account-pop-item.danger {
+  color: var(--color-danger);
+}
+
+.account-pop-lede {
+  margin: 0;
+  padding: 12px 16px 14px;
+  border-bottom: 1px solid var(--color-rule);
+  color: var(--color-ink-2);
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.account-pop-auth {
+  display: grid;
+  gap: 8px;
+  padding: 14px 16px 10px;
+}
+
+/* Same cascade trap as the items: .header-account button's transparent fill and
+   header ink out-specify .primary-action, leaving an invisible white-on-white
+   button. Restate both here. */
+.header-account .account-pop-auth .primary-action {
+  justify-content: center;
+  min-height: 40px;
+  border: 0;
+  background: var(--color-accent);
+  color: var(--color-accent-ink);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.header-account .account-pop-link {
+  min-height: 36px;
+  border: 0;
+  padding: 0;
+  background: none;
+  color: var(--teal);
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.account-pop [role="menuitem"]:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: -2px;
+}
+
+@media (hover: hover) {
+  .header-account .account-pop-item:hover {
+    background: var(--color-paper-2);
+  }
+
+  .header-account .account-pop-link:hover {
+    text-decoration: underline;
+  }
+}
+
+.header-account button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 40px;
+  border: 1px solid var(--color-header-rule);
+  border-radius: var(--radius-control);
+  padding: 0 14px;
+  background: transparent;
+  color: var(--color-header-ink);
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+@media (hover: hover) {
+  .header-account button:hover {
+    background: var(--color-header-hover);
+  }
+}
+
+/* Every sidebar destination moved into the header. */
+.sidebar-footer {
+  display: none;
+}
+
+.app-shell {
+  display: grid;
+  grid-template-columns: 300px minmax(0, 1fr);
+  min-height: calc(100vh - 80px);
+}
+
+.home-view {
+  min-height: calc(100vh - 80px);
+  background: var(--paper);
+}
+
+/* ==========================================================================
+   Home — 大开本 broadsheet. Seven edge-to-edge colour fields, no enclosing
+   borders anywhere: the change of ground IS the edge between sections.
+   ========================================================================== */
+.home-page {
+  display: grid;
+  gap: 0;
+}
+
+.hp-field {
+  padding: var(--field-pad) var(--field-inset);
+}
+
+.hp-field.hp-cont {
+  padding-top: 0;
+}
+
+/* The half that hands off to a continuation does not need a full field's worth of
+   bottom padding — the pair is one field visually. */
+.hp-field:has(+ .hp-field.hp-cont) {
+  padding-bottom: clamp(28px, 3vw, 52px);
+}
+
+/* The tail half of 口径与来源 keeps the right-hand column's width on desktop. */
+.hp-prov-tail {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.hp-prov-tail > div {
+  grid-column: 1;
+}
+
+/* Bars sit under the heading at the same measure the other fields use. */
+.hp-prov-tail .hp-src {
+  width: 100%;
+  max-width: var(--read-max);
+}
+
+.hp-field > * {
+  width: 100%;
+  max-width: var(--edit-max);
+  margin-inline: auto;
+}
+
+.hp-eyebrow {
+  margin: 0 0 14px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--color-rule);
+  color: var(--color-accent);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  margin-right: -0.12em;
+}
+
+.hp-field.on-dark .hp-eyebrow {
+  border-bottom-color: var(--color-hairline-dark);
+  color: var(--color-on-dark-2);
+}
+
+.hp-h2 {
+  max-width: 18ch;
+  margin: 0 0 clamp(24px, 3vw, 44px);
+  font-family: var(--font-display);
+  font-size: clamp(28px, 3.4vw, 54px);
+  font-weight: 800;
+  line-height: 1.18;
+  letter-spacing: 0;
+}
+
+/* Exactly two lines, broken at the comma rather than wherever the 18ch measure
+   happens to fall — which set this heading as three ragged lines on a phone. */
+.hp-h2-split {
+  max-width: none;
+}
+
+.hp-h2-split span {
+  display: block;
+}
+
+.hp-foot {
+  margin: 20px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.hp-field.on-dark .hp-foot {
+  color: var(--color-on-dark-3);
+}
+
+/* ---- FIELD 1 · 封面 ---- */
+.hp-cover {
+  display: grid;
+  grid-template-rows: auto minmax(clamp(220px, 34vh, 420px), 1fr) auto;
+  min-height: min(86svh, 860px);
+  padding: 0 var(--field-inset) clamp(56px, 7vw, 112px);
+  background: var(--color-field-cover);
+  color: var(--color-on-dark);
+}
+
+.hp-cover > * {
+  width: 100%;
+  max-width: var(--edit-max);
+  margin-inline: auto;
+}
+
+.hp-mast {
+  display: none;
+  grid-row: 1;
+}
+
+/* Only ever shown on handheld (the mast is display:none until the ≤920 block
+   reveals it); size by height so the transparent mark keeps its 256:230 ratio
+   instead of the stale 26×32 img attrs squashing it. */
+.hp-mast img {
+  width: auto;
+  height: 30px;
+}
+
+/* The one photograph, spent once. No text ever sits on it, so every contrast
+   figure on this page is flat-field arithmetic a future crop cannot invalidate. */
+.hp-plate-img {
+  position: relative;
+  grid-row: 2;
+  min-height: clamp(220px, 34vh, 420px);
+  max-width: none;
+  margin-inline: calc(var(--field-inset) * -1);
+  /* `.hp-cover > *` sets width: 100%, which pins the border box to the column so
+     the negative margin only slid the plate left — flush on one edge, 32px short
+     on the other. auto lets the grid stretch it across both insets. */
+  width: auto;
+}
+
+/* The photo carries the filter on its own layer. On the element it also applied
+   to the ::after scrim below, desaturating the gradient's --color-field-cover
+   stop — harmless against a near-black ground, a hard seam against this one. */
+.hp-plate-img::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("./assets/hero-industrial-emissions.jpg") 62% 42% / cover no-repeat;
+  filter: grayscale(0.72) contrast(1.05);
+}
+
+.hp-plate-img::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, transparent 0 44%, var(--color-field-cover) 100%),
+    linear-gradient(90deg, var(--color-field-cover) 0, transparent 30%);
+}
+
+.hp-cover-body {
+  grid-row: 3;
+  align-self: end;
+  padding-top: clamp(28px, 4vw, 56px);
+}
+
+.hp-kicker {
+  margin: 0;
+  color: var(--color-on-dark-3);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+.hp-cover h1 {
+  margin: 12px 0 clamp(18px, 2vw, 28px);
+  font-family: "Microsoft YaHei", "微软雅黑", var(--font-body);
+  font-weight: 800;
+  line-height: 1.22;
+  letter-spacing: 0;
+}
+
+/* The headline is two balanced lines broken at the comma (科学选用排放因子， /
+   实现可靠碳排放核算), each 9 characters. Sizing to 9.4 characters keeps each line
+   on one row at every width — the mobile column (100vw − 32px gutters) drives the
+   floor, the desktop cap keeps two lines from dominating the cover. */
+.hp-cover h1 span {
+  display: block;
+  white-space: nowrap;
+  font-size: min(clamp(28px, 4.4vw, 58px), calc((100vw - 32px) / 9.4));
+}
+
+.hp-deck {
+  max-width: 42ch;
+  margin: 0;
+  color: var(--color-on-dark-2);
+  font-size: clamp(17px, 1.15vw, 20px);
+  line-height: 1.9;
+}
+
+.hp-cover-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: clamp(16px, 2vw, 28px);
+  margin-top: clamp(28px, 3.5vw, 48px);
+}
+
+.hp-cover .primary-action {
+  min-height: 56px;
+  padding: 0 34px;
+  border-radius: 2px;
+  font-size: 17px;
+}
+
+.hp-cover-meta {
+  margin: 0;
+  color: var(--color-on-dark-3);
+  font-size: 13px;
+}
+
+body[data-view="home"] .site-header {
+  background: var(--color-field-cover);
+  box-shadow: none;
+}
+
+/* Desktop cover: the photo fills the whole field and fades into the ground at the
+   bottom; the copy sits over the lower gradient, lifted toward centre. Handheld
+   keeps the frozen photo-band-then-text stack. */
+@media (min-width: 921px) {
+  .home-page > section.hp-cover {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: normal;
+    overflow: hidden;
+    padding: 0 var(--field-inset);
+  }
+
+  .hp-cover .hp-plate-img {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: calc(var(--field-inset) * -1);
+    right: calc(var(--field-inset) * -1);
+    width: auto;
+    max-width: none;
+    min-height: 0;
+    margin: 0;
+    z-index: 0;
+  }
+
+  /* Three layers: (1) a left column darkening so the left-aligned copy clears
+     4.5:1 over the photo's bright sky without dimming the whole frame; (2) a
+     bottom ramp that dissolves the base into the ground; (3) a light overall
+     veil. The right two-thirds of the photo stay readable. */
+  .hp-cover .hp-plate-img::after {
+    background:
+      linear-gradient(
+        90deg,
+        color-mix(in oklch, var(--color-field-cover) 84%, transparent) 0%,
+        color-mix(in oklch, var(--color-field-cover) 54%, transparent) 46%,
+        transparent 78%
+      ),
+      linear-gradient(
+        180deg,
+        transparent 0 20%,
+        color-mix(in oklch, var(--color-field-cover) 34%, transparent) 55%,
+        var(--color-field-cover) 100%
+      ),
+      color-mix(in oklch, var(--color-field-cover) 14%, transparent);
+  }
+
+  .hp-cover-body {
+    position: relative;
+    z-index: 1;
+    align-self: auto;
+    padding-top: 0;
+    /* nudge the block below dead centre so it settles into the darker lower half */
+    margin-top: clamp(40px, 10vh, 140px);
+    /* more breathing room from the left edge for the hero copy */
+    padding-left: clamp(24px, 3.5vw, 88px);
+  }
+
+  /* Over the photo the muted eyebrow can't clear 4.5:1; lift it one step to the
+     secondary on-dark tone (still reads as a label, now legible). */
+  .hp-cover .hp-kicker {
+    color: var(--color-on-dark-2);
+  }
+}
+
+/* ---- FIELD 2 · 数目 + 626 标记场 ---- */
+.hp-count {
+  /* A deeper shade of the cover / logo blue (hue 250) rather than the old teal
+     green (hue 168), which read as out of family beside the blue cover and the
+     near-black fields. The scope marks (teal/amber/coral) still pop on it. */
+  background: linear-gradient(180deg, oklch(24% 0.04 250), oklch(20% 0.036 250));
+  color: var(--color-on-dark);
+}
+
+.hp-count-kicker {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--color-hairline-dark);
+  color: var(--color-on-dark-3);
+  font-size: 13px;
+}
+
+.hp-figure {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  margin: clamp(28px, 4vw, 56px) 0 0;
+}
+
+.hp-figure b {
+  margin-left: -0.05em;
+  font-family: var(--font-display);
+  font-size: clamp(96px, 16vw, 220px);
+  font-weight: 800;
+  line-height: 0.82;
+  letter-spacing: 0;
+  font-variant-numeric: tabular-nums;
+}
+
+.hp-figure span {
+  color: var(--color-on-dark-2);
+  font-family: var(--font-display);
+  font-size: clamp(20px, 2.3vw, 36px);
+  font-weight: 700;
+}
+
+.hp-figure-sub {
+  margin: 14px 0 0;
+  color: var(--color-on-dark-3);
+  font-size: 14px;
+}
+
+/* One mark per factor. The last row is ragged on purpose — do not pad it. */
+.hp-marks {
+  display: grid;
+  grid-template-columns: repeat(var(--mark-cols, 44), minmax(0, 1fr));
+  gap: var(--mark-gap, 5px);
+  margin-top: clamp(32px, 4vw, 56px);
+}
+
+.hp-marks i {
+  display: block;
+  aspect-ratio: 1;
+  border-radius: 1px;
+}
+
+.hp-marks .s1 {
+  background: var(--mark-s1);
+}
+
+.hp-marks .s2 {
+  background: var(--mark-s2);
+}
+
+.hp-marks .s3 {
+  background: var(--mark-s3);
+}
+
+@media (max-width: 1199px) {
+  .hp-marks {
+    --mark-cols: 36;
+    --mark-gap: 4px;
+  }
+}
+
+.hp-scopes {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: clamp(36px, 4vw, 60px);
+}
+
+.hp-scopes button {
+  display: grid;
+  align-content: start;
+  gap: 10px;
+  min-height: 132px;
+  padding: 22px clamp(14px, 1.6vw, 28px);
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  text-align: left;
+}
+
+.hp-scopes button + button {
+  border-left: 1px solid var(--color-hairline-dark);
+}
+
+.hp-scopes .sw {
+  width: 14px;
+  height: 14px;
+  border-radius: 1px;
+}
+
+.hp-scopes .sw.s1 {
+  background: var(--mark-s1);
+}
+
+.hp-scopes .sw.s2 {
+  background: var(--mark-s2);
+}
+
+.hp-scopes .sw.s3 {
+  background: var(--mark-s3);
+}
+
+.hp-scopes .nm {
+  margin-right: -0.1em;
+  color: var(--color-on-dark-2);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+.hp-scopes .ct {
+  font-family: var(--font-display);
+  font-size: clamp(34px, 4.6vw, 72px);
+  font-weight: 800;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.hp-scopes .sh {
+  color: var(--color-on-dark-3);
+  font-size: 13px;
+}
+
+@media (hover: hover) {
+  .hp-scopes button:hover {
+    background: oklch(28% 0.04 250);
+  }
+}
+
+/* ---- FIELD 3 · 读法 ---- */
+.hp-method {
+  background: var(--color-paper);
+}
+
+.hp-method-head {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: clamp(32px, 4vw, 72px);
+  align-items: baseline;
+}
+
+.hp-method-head .hp-h2 {
+  grid-column: 1 / 7;
+}
+
+.hp-lede {
+  grid-column: 8 / -1;
+  max-width: 40ch;
+  margin: 0;
+  color: var(--color-ink-2);
+  font-size: clamp(17px, 1.15vw, 20px);
+  line-height: 1.9;
+}
+
+/* Three border-tops read as one newspaper rule broken by the gutters. */
+.hp-steps {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  column-gap: clamp(32px, 4vw, 72px);
+  margin: clamp(48px, 6vw, 88px) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.hp-steps li {
+  border-top: 1px solid var(--color-rule);
+  padding-top: 22px;
+}
+
+.hp-steps b {
+  display: block;
+  margin-bottom: 16px;
+  color: var(--color-accent);
+  font-family: var(--font-display);
+  font-size: clamp(34px, 3.6vw, 52px);
+  font-weight: 400;
+}
+
+.hp-steps p {
+  max-width: 30ch;
+  margin: 0;
+  color: var(--color-ink-2);
+  font-size: 17px;
+  line-height: 1.9;
+}
+
+.hp-textlink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  min-height: 44px;
+  margin-top: clamp(36px, 4vw, 56px);
+  padding: 12px 0;
+  border: 0;
+  border-bottom: 2px solid currentColor;
+  background: none;
+  color: var(--color-accent);
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: 800;
+}
+
+/* ---- FIELD 4 · 索引 ---- */
+.hp-index {
+  background: var(--color-paper-2);
+}
+
+.hp-index-list {
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-rows: repeat(10, auto);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: clamp(40px, 5vw, 88px);
+}
+
+.hp-index-list button {
+  display: grid;
+  grid-template-columns: 46px minmax(0, 1fr) auto;
+  gap: 0 14px;
+  align-items: baseline;
+  min-height: 52px;
+  margin-inline: calc(var(--field-inset) * -1);
+  padding: 13px var(--field-inset);
+  border: 0;
+  border-bottom: 1px solid var(--color-rule);
+  background: transparent;
+  cursor: pointer;
+  text-align: left;
+}
+
+/* Desktop: keep the row hairlines inside the editorial column so they line up
+   with the 因子类别 eyebrow rule instead of bleeding to the screen edges. On
+   handheld the full-bleed row (with its edge-to-edge hover) is kept. */
+@media (min-width: 921px) {
+  .hp-index-list button {
+    margin-inline: 0;
+    padding-inline: 0;
+  }
+}
+
+.hp-index-list .sc {
+  color: var(--color-accent);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.hp-index-list .nm {
+  color: var(--color-ink);
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.hp-index-list .ct {
+  color: var(--color-ink);
+  font-size: 18px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+.hp-index-list .ct::after {
+  content: "条";
+  margin-left: 3px;
+  color: var(--color-muted-2);
+  font-size: 12px;
+  font-weight: 400;
+}
+
+@media (hover: hover) {
+  .hp-index-list button:hover {
+    background: var(--color-paper);
+  }
+}
+
+/* ---- FIELD 5 · 口径与来源 ---- */
+.hp-prov {
+  background: var(--color-field-ink);
+  color: var(--color-on-dark);
+}
+
+.hp-prov-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  column-gap: clamp(48px, 6vw, 110px);
+  align-items: start;
+}
+
+.hp-note {
+  padding: 30px 0;
+  border-top: 1px solid var(--color-hairline-dark);
+}
+
+.hp-note h3 {
+  margin: 0 0 10px;
+  font-family: var(--font-display);
+  font-size: 21px;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+.hp-note p {
+  max-width: 40ch;
+  margin: 0;
+  color: var(--color-on-dark-2);
+  font-size: 16px;
+  line-height: 1.9;
+}
+
+.hp-src {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0 16px;
+  align-items: baseline;
+  padding: 16px 0;
+  border-top: 1px solid var(--color-hairline-dark);
+}
+
+.hp-src .nm {
+  color: var(--color-on-dark-2);
+  font-size: 15px;
+}
+
+.hp-src .ct {
+  font-family: var(--font-display);
+  font-size: clamp(22px, 1.9vw, 30px);
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+/* A bare fill with no track behind it — nothing on this page encloses anything. */
+.hp-src .bar {
+  grid-column: 1 / -1;
+  width: calc(var(--w) * 1%);
+  min-width: 3px;
+  height: 4px;
+  margin-top: 10px;
+  border-radius: 1px;
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 760ms var(--ease-out) 120ms;
+}
+
+.hp-src.is-in .bar {
+  clip-path: inset(0 0 0 0);
+}
+
+/* ---- FIELD 6 · 入口 ---- */
+.hp-door {
+  display: grid;
+  align-items: stretch;
+  background: var(--color-field-plate);
+  color: var(--color-on-dark);
+}
+
+.hp-door-inner {
+  display: grid;
+  grid-template-rows: 1fr auto;
+  gap: clamp(32px, 4vw, 56px);
+  width: 100%;
+  min-height: 0;
+}
+
+/* The invitation is centred; everything under it settles at the bottom, flush left. */
+.hp-door-top {
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  gap: clamp(20px, 3vw, 36px);
+  text-align: center;
+}
+
+/* cpcd-mark.png is a white glyph baked onto an opaque navy square (0% alpha in the
+   file), so the plate cannot be knocked out. It is treated as a deliberate seal
+   instead: rounded, ringed, sized as a mark rather than an image. */
+/* The mark is a transparent white glyph now, so it sits straight on the dark
+   ground — the rounded plate + ring + cover-crop existed only to make the old
+   opaque badge look intentional, and are dropped. */
+.hp-door-mark {
+  width: auto;
+  height: 104px;
+}
+
+.hp-door .hp-door-cta {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.4em;
+  padding: 10px 0;
+  border: 0;
+  border-bottom: 3px solid var(--mark-s1);
+  background: none;
+  color: inherit;
+  cursor: pointer;
+  font-family: var(--font-display);
+  font-size: clamp(32px, 4.4vw, 64px);
+  font-weight: 800;
+}
+
+.hp-door .hp-door-cta:hover {
+  border-bottom-color: currentColor;
+}
+
+.hp-door .hp-door-cta:hover .ar {
+  transform: translateX(6px);
+}
+
+.hp-door .ar {
+  display: inline-block;
+  transition: transform 220ms var(--ease-out);
+}
+
+/* One grid for all three rows so every label shares a column and every value
+   starts on the same line — same face, same size, only colour separates them. */
+.hp-door-foot {
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr);
+  gap: 10px clamp(16px, 2vw, 28px);
+  align-self: end;
+  align-items: baseline;
+  padding-top: clamp(20px, 2.5vw, 32px);
+  border-top: 1px solid var(--color-hairline-dark);
+  text-align: left;
+  font-size: clamp(13px, 1.05vw, 15px);
+}
+
+.hp-door-foot dt {
+  color: var(--color-on-dark-3);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.hp-door-foot dd {
+  margin: 0;
+  color: var(--color-on-dark);
+  font-variant-numeric: tabular-nums;
+}
+
+.hp-team-names {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px clamp(14px, 1.6vw, 26px);
+}
+
+.hp-team-names span {
+  white-space: nowrap;
+}
+
+/* ---- 建设团队 roster ---- */
+.team-roster {
+  margin: var(--space-lg) 0;
+  padding: var(--space-lg) 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.team-roster h4 {
+  margin: 0 0 14px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+
+.team-roster ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px clamp(24px, 3vw, 44px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.team-roster li {
+  font-family: var(--font-display);
+  font-size: 21px;
+  font-weight: 700;
+}
+
+/* ---- reveal ---- */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 460ms var(--ease-out),
+    transform 460ms var(--ease-out);
+}
+
+[data-reveal].is-in {
+  opacity: 1;
+  transform: none;
+}
+
+[data-reveal="2"] {
+  transition-delay: 90ms;
+}
+
+[data-reveal="3"] {
+  transition-delay: 180ms;
+}
+
+.sidebar {
+  position: sticky;
+  top: 80px;
+  height: calc(100vh - 80px);
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  padding: var(--space-lg) 18px;
+  border-right: 1px solid var(--line);
+  background: var(--color-paper-2);
+}
+
+.eyebrow {
+  margin: 0;
+  color: var(--teal);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.period {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+input,
+select {
+  width: 100%;
+  min-height: 42px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-control);
+  background: var(--color-panel);
+  color: var(--ink);
+  padding: 0 12px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.search-dock {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: end;
+  padding: var(--space-md) var(--space-xl) var(--space-lg);
+}
+
+.search-box {
+  position: relative;
+}
+
+.search-box input {
+  min-height: 46px;
+  border-radius: var(--radius-pill);
+  /* room for the trigger, which now sits inside the field */
+  padding: 0 52px 0 18px;
+}
+
+#searchButton {
+  position: absolute;
+  top: 50%;
+  right: 5px;
+  transform: translateY(-50%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--color-accent);
+  color: var(--color-accent-ink);
+  cursor: pointer;
+}
+
+#searchButton svg {
+  width: 17px;
+  height: 17px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+@media (hover: hover) {
+  #searchButton:hover {
+    background: color-mix(in oklch, var(--color-accent) 86%, var(--color-ink));
+  }
+}
+
+/* Desktop keeps the sidebar tree; the switcher and category tiles are handheld-only. */
+.scope-switch,
+.category-strip {
+  display: none;
+}
+
+.scope-nav {
+  display: grid;
+  gap: 14px;
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  padding-bottom: 18px;
+}
+
+.all-factors,
+.scope-heading,
+.category-link {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+  text-align: left;
+}
+
+.all-factors,
+.scope-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 42px;
+  border-radius: var(--radius-control);
+  padding: 0 12px;
+  font-weight: 800;
+}
+
+.all-factors {
+  background: var(--color-panel);
+  border: 1px solid var(--line);
+}
+
+.scope-heading {
+  background: var(--color-paper-3);
+}
+
+.all-factors.active,
+.scope-heading.active {
+  color: var(--color-accent-ink);
+  background: var(--teal);
+}
+
+.all-factors strong,
+.scope-heading strong {
+  font-size: 13px;
+}
+
+.scope-group {
+  display: grid;
+  gap: 8px;
+}
+
+.category-list {
+  display: grid;
+  gap: 2px;
+  padding-left: 10px;
+}
+
+.category-link {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 10px;
+  align-items: center;
+  min-height: 34px;
+  border-left: 2px solid var(--line);
+  padding: 6px 8px 6px 12px;
+  color: var(--color-ink-2);
+  font-size: 13px;
+  line-height: 1.25;
+}
+
+.category-link span {
+  overflow-wrap: anywhere;
+}
+
+.category-link em {
+  color: var(--muted);
+  font-style: normal;
+  font-size: 12px;
+}
+
+.category-link.active {
+  border-left-color: var(--teal);
+  color: var(--teal);
+  background: color-mix(in oklch, var(--teal) 8%, transparent);
+}
+
+/* Gated: on touch, :hover sticks to the last-tapped element until you tap elsewhere. */
+@media (hover: hover) {
+  .category-link:hover {
+    border-left-color: var(--teal);
+    color: var(--teal);
+    background: color-mix(in oklch, var(--teal) 8%, transparent);
+  }
+}
+
+.category-link.empty {
+  color: var(--color-muted);
+}
+
+.category-link.empty em {
+  color: var(--color-muted);
+}
+
+.sidebar-footer {
+  margin-top: 0;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+}
+
+.utility-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 0;
+}
+
+.utility-link,
+.head-actions button,
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  border: 1px solid var(--teal);
+  border-radius: var(--radius-control);
+  padding: 0 12px;
+  color: var(--teal);
+  background: var(--color-panel);
+  text-decoration: none;
+  cursor: pointer;
+  font-weight: 700;
+  white-space: nowrap;
+  transition:
+    background-color var(--dur-short) var(--ease-out),
+    color var(--dur-short) var(--ease-out),
+    border-color var(--dur-short) var(--ease-out),
+    transform 100ms var(--ease-out);
+}
+
+.utility-link {
+  border-color: transparent;
+  padding: 0;
+  background: transparent;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.utility-link.active,
+.utility-link:hover {
+  color: var(--teal);
+}
+
+.main-area {
+  min-width: 0;
+}
+
+/* No page carries a title bar. On the factor list the scope strip already says
+   where you are; every reading page (Q&A / 参考文献 / 建设团队 / 基本信息) and every
+   account page opens on its own heading, so .data-head would only repeat it. */
+body[data-view="data"] .data-head,
+body[data-view="content"] .data-head {
+  display: none;
+}
+
+/* Reading and account pages are full-measure: the sidebar tree only navigates the
+   factor list and the search box only filters it, so both are noise here — and an
+   unrendered sidebar leaves a blank 300px column. */
+body[data-view="content"] .app-shell {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+body[data-view="content"] .sidebar,
+body[data-view="content"] .search-dock {
+  display: none;
+}
+
+body[data-view="content"] .view-panel {
+  padding-top: var(--space-lg);
+}
+
+/* With the sidebar gone this is the only way back to the list, so it stays — but
+   as a quiet text link, not a button competing with the page heading. */
+body[data-view="content"] .back-link {
+  min-height: 0;
+  margin-bottom: 28px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--color-muted-2);
+  font-size: var(--text-sm);
+  font-weight: 600;
+}
+
+body[data-view="content"] .back-link::before {
+  content: "←";
+  margin-right: 8px;
+}
+
+/* The Q&A reader is a centred 40em column; a flush-left back link would float
+   240px away from the text it belongs to. Match the reader's measure. */
+body[data-page="Q&A"] .back-link {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+  /* The reader is a 40rem column centred inside #contentPage's 1180px measure,
+     but the link is a sibling of #contentPage and centres against the wider
+     panel — so reproduce the same indent instead of centring it. rem, not em:
+     the link is 14px while .qa-reader's 40em resolves against the 16px root. */
+  padding-left: max(0px, calc((min(1180px, 100%) - 40rem) / 2));
+}
+
+@media (hover: hover) {
+  body[data-view="content"] .back-link:hover {
+    color: var(--teal);
+    background: none;
+  }
+}
+
+.data-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 360px);
+  gap: 18px;
+  align-items: center;
+  padding: var(--space-lg) var(--space-xl) var(--space-md);
+  border-bottom: 1px solid var(--line);
+  background: var(--color-panel);
+}
+
+.data-head h2 {
+  max-width: 780px;
+  margin: 8px 0 12px;
+  font-family: var(--font-display);
+  font-size: 30px;
+  font-weight: 800;
+  line-height: 1.18;
+  letter-spacing: 0;
+}
+
+.head-actions {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+  align-items: end;
+}
+
+.search-box {
+  display: grid;
+  gap: 8px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.view-panel {
+  padding: var(--space-md) var(--space-xl) var(--space-2xl);
+}
+
+.hidden {
+  display: none;
+}
+
+.result-line {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--muted);
+}
+
+.result-line strong {
+  color: var(--ink);
+  font-size: 20px;
+}
+
+.data-tools {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  margin-bottom: 12px;
+}
+
+.unit-control {
+  display: grid;
+  gap: 6px;
+  margin-bottom: 14px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.unit-label {
+  display: block;
+}
+
+.unit-segments {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(0, 1fr);
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  background: var(--color-panel);
+}
+
+.unit-control.hidden {
+  display: none;
+}
+
+.unit-control button em {
+  margin-left: 5px;
+  color: var(--muted);
+  font-size: 12px;
+  font-style: normal;
+}
+
+.unit-control button.active em {
+  color: color-mix(in oklch, var(--color-accent-ink) 78%, transparent);
+}
+
+.unit-control button {
+  min-height: 42px;
+  border: 0;
+  border-radius: 0;
+  padding: 0 10px;
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.unit-segments button + button {
+  border-left: 1px solid var(--line);
+}
+
+.unit-control button.active {
+  background: var(--teal);
+  color: var(--color-accent-ink);
+}
+
+/* NOTE: this stays a scroll container because the table's 1040px min-width
+   overflows the main column between 921px and ~1180px, and `html { overflow-x: clip }`
+   would swallow it with no way to scroll. Consequence: `th { position: sticky }`
+   below resolves against THIS box, which has no height cap and therefore never
+   scrolls — the header is not actually frozen. Fixing that properly means either
+   capping this box's height (the table then scrolls inside a frame, which also
+   breaks the batch-loading observer) or dropping horizontal scroll entirely.
+   That is a layout decision, not a bug fix, so it is left as-is deliberately. */
+.table-wrap {
+  overflow: auto;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  background: var(--panel);
+  /* Edge fades cue horizontal scrolling on narrow viewports. */
+  background-image:
+    linear-gradient(to right, var(--color-panel) 30%, transparent),
+    linear-gradient(to left, var(--color-panel) 30%, transparent),
+    linear-gradient(to right, var(--color-shadow-soft), transparent 14px),
+    linear-gradient(to left, var(--color-shadow-soft), transparent 14px);
+  background-position: 0 0, 100% 0, 0 0, 100% 0;
+  background-size:
+    36px 100%,
+    36px 100%,
+    14px 100%,
+    14px 100%;
+  background-repeat: no-repeat;
+  background-attachment: local, local, scroll, scroll;
+}
+
+/* Dropping the Scope and 类别 columns leaves 4–5 columns, so the table no longer
+   needs to overflow at any realistic desktop width. */
+table {
+  width: 100%;
+  min-width: 760px;
+  border-collapse: collapse;
+  background: transparent;
+}
+
+th,
+td {
+  border-bottom: 1px solid var(--line);
+  padding: 11px 12px;
+  text-align: left;
+  vertical-align: middle;
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: var(--color-paper-2);
+  color: var(--color-ink-2);
+  font-size: 12.5px;
+  font-weight: 850;
+  vertical-align: bottom;
+}
+
+.nowrap-col {
+  min-width: 150px;
+  white-space: nowrap;
+}
+
+tbody tr {
+  cursor: pointer;
+}
+
+tbody tr:nth-child(even) {
+  background: var(--color-paper-2);
+}
+
+@media (hover: hover) {
+  tbody tr:hover,
+  tbody tr:nth-child(even):hover {
+    background: color-mix(in oklch, var(--teal) 8%, var(--color-panel));
+  }
+}
+
+/* Per-row actions. The whole row still opens the detail sheet; these make it explicit
+   and give favouriting a target that doesn't require opening the record first. */
+.row-actions {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.row-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  min-height: 30px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  padding: 0 11px;
+  background: var(--color-panel);
+  color: var(--teal);
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.row-action i {
+  display: none;
+  font-style: normal;
+}
+
+.row-action.fav {
+  padding: 0 9px;
+  color: var(--muted);
+  font-size: 15px;
+}
+
+.row-action.fav.saved {
+  border-color: var(--color-accent-2);
+  background: color-mix(in oklch, var(--color-accent-2) 16%, var(--color-panel));
+  color: var(--color-accent-2);
+}
+
+.row-action:active {
+  transform: translateY(1px);
+}
+
+@media (hover: hover) {
+  .row-action:hover {
+    border-color: var(--teal);
+  }
+
+  .row-action.fav:hover {
+    border-color: var(--color-accent-2);
+    color: var(--color-accent-2);
+  }
+}
+
+td.actions,
+th.actions {
+  width: 1%;
+  white-space: nowrap;
+}
+
+/* Scope headings for the 全部因子 view, which no longer carries a per-row Scope column. */
+.group-row {
+  cursor: default;
+}
+
+.group-row td {
+  padding: 18px 12px 9px;
+  border-bottom: 1px solid var(--color-rule-strong);
+  background: var(--color-paper-2);
+  box-shadow: inset 3px 0 0 var(--teal);
+}
+
+.group-row.s2 td {
+  box-shadow: inset 3px 0 0 var(--amber);
+}
+
+.group-row.s3 td {
+  box-shadow: inset 3px 0 0 var(--coral);
+}
+
+tbody .group-row:first-child td {
+  padding-top: 10px;
+}
+
+.group-row span {
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.group-row em {
+  margin-left: 10px;
+  color: var(--muted);
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 700;
+}
+
+.scope-pill {
+  display: inline-flex;
+  align-items: center;
+  min-height: 26px;
+  border-radius: var(--radius-pill);
+  padding: 0 10px;
+  color: var(--color-accent-ink);
+  font-size: 12px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.s1 {
+  background: var(--teal);
+}
+
+.s2 {
+  background: var(--amber);
+}
+
+.s3 {
+  background: var(--coral);
+}
+
+.number {
+  color: var(--color-ink);
+  font-weight: 800;
+  font-family: var(--font-mono);
+}
+
+.muted {
+  color: var(--muted);
+}
+
+/* Numerals scan down a column by their right edge. Table only — the handheld
+   card layout stacks these cells and would left-align them anyway. */
+@media (min-width: 921px) {
+  th[data-col="factor"],
+  td[data-col="factor"] {
+    text-align: right;
+  }
+
+  td[data-col="factor"] {
+    padding-right: 16px;
+  }
+
+  /* ---- Home as slides, desktop edition ----
+     Same model as handheld, two differences: the field is a viewport minus the
+     80px sticky header rather than a whole 100svh, and scroll-padding-top keeps
+     the snap point below that header instead of under it. The handheld block is
+     left exactly as it was. */
+  body[data-view="home"] {
+    scroll-snap-type: y mandatory;
+    scroll-padding-top: 80px;
+  }
+
+  .home-page > section {
+    min-height: calc(100vh - 80px);
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    display: grid;
+    align-content: center;
+  }
+
+  /* Credits settle on the bottom edge; needs to out-specify the rule above. */
+  .home-page > section.hp-door {
+    align-content: stretch;
+  }
+
+  /* ---- Fit one field to one screen ----
+     Everything below is height-aware. The tokens are width-only by default,
+     which is why a 1280x720 window spent 230px of its 640px budget on padding
+     alone and every field overflowed. */
+  .home-page {
+    --field-pad: clamp(30px, min(9vw, 5vh), 110px);
+  }
+
+  /* The grid's height comes from its column count, which was pinned at 44 — so
+     it scaled with width and ignored height entirely. Sizing the mark instead
+     lets auto-fill choose the columns and keeps the block near 10 rows at any
+     window size. */
+  .hp-marks {
+    --mark-size: clamp(5px, min(1.15vw, 2vh), 22px);
+    --mark-gap: max(2px, calc(var(--mark-size) * 0.22));
+    grid-template-columns: repeat(auto-fill, var(--mark-size));
+    gap: var(--mark-gap);
+    margin-top: clamp(20px, 3vh, 48px);
+  }
+
+  .hp-marks i {
+    width: var(--mark-size);
+    height: var(--mark-size);
+  }
+
+  .hp-figure {
+    margin-top: clamp(16px, 3vh, 48px);
+  }
+
+  .hp-figure b {
+    font-size: clamp(56px, min(16vw, 13.5vh), 220px);
+  }
+
+  /* 8 source rows at a fixed 85px could not fit any window under 1080px tall. */
+  .hp-src {
+    padding: clamp(6px, 1.1vh, 16px) 0;
+  }
+
+  .hp-src .ct {
+    font-size: clamp(20px, min(1.9vw, 3vh), 30px);
+  }
+
+  .hp-src .bar {
+    margin-top: clamp(5px, 1vh, 10px);
+  }
+
+  /* Three notes at a fixed 30px of padding each. */
+  .hp-note {
+    padding: clamp(9px, 1.6vh, 30px) 0;
+  }
+
+  .hp-h2 {
+    margin-bottom: clamp(14px, min(3vw, 2.6vh), 44px);
+    font-size: clamp(24px, min(3.4vw, 3.9vh), 54px);
+  }
+
+  .hp-cover h1 {
+    font-size: min(clamp(38px, 6.6vw, 104px), calc((100vw - 32px) / 9.2), 9.5vh);
+  }
+
+  .hp-eyebrow {
+    margin-bottom: clamp(8px, 1.6vh, 14px);
+    padding-bottom: clamp(8px, 1.6vh, 14px);
+  }
+
+  /* 19 rows at a fixed 52px is 988px on its own — the single largest fixed cost
+     on the page after the mark grid. */
+  .hp-index-list button {
+    min-height: clamp(38px, 5.6vh, 52px);
+    padding-block: clamp(6px, 1.3vh, 13px);
+  }
+
+  .hp-cover {
+    padding-bottom: clamp(32px, min(7vw, 6vh), 112px);
+    min-height: 0;
+  }
+
+  .hp-cover-body {
+    padding-top: clamp(18px, min(4vw, 3.4vh), 56px);
+  }
+
+  .hp-cover-actions {
+    margin-top: clamp(20px, min(3.5vw, 3.6vh), 48px);
+  }
+
+  .hp-deck {
+    margin-top: clamp(8px, 1.4vh, 18px);
+  }
+
+  /* 40ch on Chinese is ~20 characters, so each note ran three short lines. At a
+     proper 34-character measure they set in two — correct typography that also
+     happens to be the last ~90px this field needed. */
+  .hp-note p {
+    max-width: 34em;
+    font-size: clamp(14px, min(1.6vw, 2vh), 16px);
+    line-height: 1.75;
+  }
+
+  .hp-note h3 {
+    margin-bottom: clamp(5px, 1.1vh, 10px);
+    font-size: clamp(17px, min(1.9vw, 2.7vh), 21px);
+  }
+
+  .hp-marks {
+    --mark-size: clamp(5px, min(1.15vw, 1.6vh), 22px);
+  }
+
+  /* 18ch is about nine Chinese characters, so an 11-character heading like
+     "8 类来源，逐条可追溯" broke after 追 and the 31-character 重要说明 sentence
+     ran four lines. em measures the script actually being set. */
+  .hp-h2 {
+    max-width: 16em;
+  }
+
+  /* .hp-prov-grid is 7fr/5fr but the renderer only ever emits one child, so the
+     5fr track was always empty — 514px of dead space on both provenance screens.
+     (It also out-declared .hp-prov-tail's single-column override.) One column at
+     the reading measure instead, so the eyebrow hairline and the bars below it
+     line up on the same edge. */
+  .hp-prov-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .hp-prov-grid > div {
+    max-width: var(--read-max);
+  }
+}
+
+/* Give the leading column room before the auto layout hands it to 备注. */
+td[data-col="source"],
+th[data-col="source"] {
+  min-width: 190px;
+}
+
+td[data-col="feature"],
+th[data-col="feature"] {
+  max-width: 220px;
+}
+
+/* Cap remarks at two lines so row heights stay even; full text lives in the detail dialog. */
+.clamp {
+  min-width: 220px;
+  max-width: 460px;
+}
+
+.clamp > span {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+}
+
+#contentPage {
+  max-width: 1180px;
+}
+
+.back-link {
+  margin-bottom: 16px;
+  background: var(--color-panel);
+}
+
+.content-table {
+  width: 100%;
+  min-width: 760px;
+  background: var(--color-panel);
+}
+
+.content-table td:first-child {
+  width: 76px;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+dialog {
+  width: min(920px, calc(100vw - 32px));
+  max-height: min(760px, calc(100vh - 32px));
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  padding: 0;
+  color: var(--ink);
+}
+
+#authDialog {
+  width: min(460px, calc(100vw - 32px));
+}
+
+dialog::backdrop {
+  background: color-mix(in oklch, var(--color-ink) 48%, transparent);
+}
+
+.dialog-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: var(--space-lg);
+  border-bottom: 1px solid var(--line);
+  background: var(--color-paper-2);
+}
+
+.dialog-head h3 {
+  margin: 6px 0 0;
+  font-size: 22px;
+  letter-spacing: 0;
+}
+
+#closeDialog,
+#closeAccountDialog {
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: var(--color-panel);
+  cursor: pointer;
+  font-size: 24px;
+  line-height: 1;
+}
+
+#closeAccountDialog {
+  flex: 0 0 auto;
+}
+
+#closeAuthDialog {
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: var(--color-panel);
+  cursor: pointer;
+  font-size: 24px;
+  line-height: 1;
+}
+
+.auth-dialog {
+  margin: 0;
+}
+
+.auth-body {
+  display: grid;
+  gap: 14px;
+  padding: 20px;
+}
+
+.auth-body label {
+  display: grid;
+  gap: 7px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.auth-note,
+.auth-message {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.auth-message.error {
+  color: var(--color-danger);
+}
+
+.auth-message.success {
+  color: var(--teal);
+}
+
+#authSubmit {
+  min-height: 42px;
+  border: 1px solid var(--teal);
+  border-radius: var(--radius-control);
+  background: var(--teal);
+  color: var(--color-accent-ink);
+  cursor: pointer;
+  font-weight: 800;
+}
+
+.detail-body {
+  display: grid;
+  gap: 18px;
+  padding: 20px;
+  overflow: auto;
+}
+
+/* The factor value is the payload of this database — give it top billing. */
+.detail-headline {
+  display: grid;
+  grid-template-columns: auto auto;
+  justify-content: start;
+  align-items: baseline;
+  gap: 0 10px;
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--teal);
+  border-radius: var(--radius-card);
+  padding: 16px 18px;
+  background: var(--color-paper-2);
+}
+
+.detail-headline.s2 {
+  border-left-color: var(--amber);
+}
+
+.detail-headline.s3 {
+  border-left-color: var(--coral);
+}
+
+.detail-headline span {
+  grid-column: 1 / -1;
+  margin-bottom: 6px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.detail-headline strong {
+  color: var(--ink);
+  font-family: var(--font-mono);
+  font-size: var(--text-2xl);
+  font-weight: 800;
+  line-height: 1.1;
+}
+
+.detail-headline em {
+  color: var(--color-ink-2);
+  font-size: var(--text-md);
+  font-style: normal;
+  font-weight: 700;
+}
+
+.detail-headline p {
+  grid-column: 1 / -1;
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.detail-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.detail-item.wide {
+  grid-column: 1 / -1;
+}
+
+.formula-text {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.detail-item {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  padding: 12px;
+  background: var(--color-panel);
+}
+
+.detail-item span {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.detail-item strong {
+  word-break: break-word;
+}
+
+/* ==========================================================================
+   Q&A reader — long-form, no boxes. Type and rhythm carry the structure.
+   ========================================================================== */
+.qa-reader {
+  max-width: 40em;
+  margin: 0 auto;
+  padding-bottom: var(--space-xl);
+}
+
+/* Same language as the range menu: sliding tabs with an underline marker. */
+.qa-jump {
+  position: sticky;
+  top: 80px;
+  z-index: 5;
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  margin-bottom: var(--space-md);
+  border-bottom: 1px solid var(--line);
+  background: var(--paper);
+}
+
+.qa-jump::-webkit-scrollbar {
+  display: none;
+}
+
+.qa-jump button {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: baseline;
+  gap: 5px;
+  border-bottom: 2px solid transparent;
+  padding: 11px 13px 9px;
+  border-top: 0;
+  border-right: 0;
+  border-left: 0;
+  background: none;
+  color: var(--muted);
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 700;
+  white-space: nowrap;
+  transition:
+    color var(--dur-short) var(--ease-out),
+    border-color var(--dur-short) var(--ease-out);
+}
+
+.qa-jump button em {
+  font-size: 11px;
+  font-style: normal;
+  opacity: 0.75;
+}
+
+.qa-jump button.active {
+  border-bottom-color: var(--teal);
+  color: var(--ink);
+}
+
+@media (hover: hover) {
+  .qa-jump button:hover {
+    color: var(--ink);
+  }
+}
+
+.qa-chapter {
+  scroll-margin-top: 148px;
+  padding-top: var(--space-lg);
+}
+
+.qa-chapter-head {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: var(--space-sm);
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--color-accent);
+}
+
+.qa-chapter-no {
+  color: var(--teal);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.qa-chapter-head h4 {
+  flex: 1 1 auto;
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: 0;
+}
+
+.qa-chapter-head em {
+  color: var(--muted);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 700;
+}
+
+.qa-entry {
+  border-top: 1px solid var(--line);
+}
+
+/* the chapter rule already closes the header; no double line under it */
+.qa-chapter .qa-entry:first-of-type {
+  border-top: 0;
+}
+
+.qa-entry > summary {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 16px;
+  align-items: start;
+  padding: var(--space-md) 0;
+  cursor: pointer;
+  list-style: none;
+}
+
+.qa-entry > summary::-webkit-details-marker {
+  display: none;
+}
+
+.qa-entry h5 {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.6;
+  letter-spacing: 0;
+}
+
+/* A plus that becomes a minus — no glyph font, no JS. */
+.qa-mark {
+  position: relative;
+  width: 15px;
+  height: 15px;
+  margin-top: 6px;
+}
+
+.qa-mark::before,
+.qa-mark::after {
+  content: "";
+  position: absolute;
+  inset: 50% 0 auto 0;
+  height: 1.5px;
+  background: var(--color-accent);
+  transition: transform var(--dur-short) var(--ease-out);
+}
+
+.qa-mark::after {
+  transform: rotate(90deg);
+}
+
+.qa-entry[open] .qa-mark::after {
+  transform: rotate(0deg);
+}
+
+@media (hover: hover) {
+  .qa-entry > summary:hover h5 {
+    color: var(--color-accent);
+  }
+}
+
+.qa-entry p {
+  margin: 0;
+  padding-bottom: var(--space-md);
+  color: var(--color-ink-2);
+  font-size: 16px;
+  line-height: 1.95;
+}
+
+.reference-sheet {
+  max-width: 68ch;
+}
+
+/* 378 entries in one column runs 21,000px. Desktop tiles them into as many
+   columns as the width holds — auto-fill, so the count grows with the window
+   (2 near 1300, 3 past ~1800, 5-6 on a 2560 display) and reflows live on resize,
+   no breakpoints. Handheld keeps the single column (frozen block untouched). */
+@media (min-width: 921px) {
+  /* .sheet caps at --read-max (1040) later in the file; both classes are needed
+     to lift the reference sheet to full width so its columns can multiply. */
+  .sheet.reference-sheet {
+    max-width: none;
+  }
+
+  .reference-list {
+    grid-template-columns: repeat(auto-fill, minmax(26em, 1fr));
+    column-gap: var(--space-2xl);
+  }
+
+  /* Each cell draws its own top hairline; one rule on the container closes the
+     bottom edge under every column regardless of how many there are. The base
+     single-cell bottom border (for the handheld 1-col list) would otherwise
+     leave a stray hairline mid-row under the DOM-last cell. */
+  .reference-list {
+    border-bottom: 1px solid var(--color-rule);
+  }
+
+  .reference-list li:last-child {
+    border-bottom: 0;
+  }
+
+  /* The lede is a sentence, not a full-measure banner. */
+  .ref-lede {
+    max-width: 34em;
+  }
+}
+
+.reference-list {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: none;
+}
+
+.reference-list li {
+  display: grid;
+  grid-template-columns: 46px minmax(0, 1fr);
+  gap: 16px;
+  align-items: baseline;
+  padding: 13px 0;
+  border-top: 1px solid var(--color-rule);
+}
+
+.reference-list li:last-child {
+  border-bottom: 1px solid var(--color-rule);
+}
+
+.reference-number {
+  color: var(--color-accent);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.reference-list p {
+  margin: 0;
+  color: var(--color-ink-2);
+  font-size: 14px;
+  line-height: 1.75;
+  overflow-wrap: anywhere;
+}
+
+.clean-content {
+  display: grid;
+  gap: 12px;
+  max-width: 960px;
+}
+
+.clean-content p,
+.clean-row {
+  margin: 0;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  padding: 14px;
+  background: var(--color-panel);
+  line-height: 1.7;
+}
+
+.clean-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 18px;
+}
+
+.clean-row span:first-child {
+  color: var(--teal);
+  font-weight: 800;
+}
+
+.info-page {
+  display: grid;
+  gap: 18px;
+  max-width: 1120px;
+}
+
+.info-hero,
+.info-section,
+.info-card {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  background: var(--color-panel);
+}
+
+.info-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 230px;
+  gap: 24px;
+  align-items: stretch;
+  padding: 24px;
+}
+
+.info-hero h3 {
+  margin: 8px 0 12px;
+  font-family: var(--font-display);
+  font-size: 30px;
+  font-weight: 800;
+  line-height: 1.18;
+  letter-spacing: 0;
+}
+
+.info-hero p,
+.info-section p,
+.info-card p,
+.info-card li {
+  color: var(--color-ink-2);
+  line-height: 1.75;
+}
+
+.info-hero p,
+.info-section p,
+.info-card p {
+  margin: 0;
+}
+
+.info-hero-card {
+  display: grid;
+  align-content: center;
+  gap: 8px;
+  border-radius: var(--radius-card);
+  padding: 18px;
+  background: var(--soft);
+}
+
+.info-hero-card span {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.info-hero-card strong {
+  margin-bottom: 8px;
+  color: var(--ink);
+  font-size: 20px;
+}
+
+.info-section,
+.info-card {
+  padding: 20px;
+}
+
+.info-section h4,
+.info-card h4 {
+  margin: 0 0 12px;
+  font-size: 19px;
+  letter-spacing: 0;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.info-card ul {
+  display: grid;
+  gap: 8px;
+  margin: 12px 0 0;
+  padding-left: 20px;
+}
+
+.info-card.accent {
+  border-color: var(--color-rule-strong);
+  background: var(--color-paper-2);
+}
+
+.formula {
+  margin: 16px 0;
+  border-radius: var(--radius-card);
+  padding: 14px;
+  background: var(--color-ink);
+  color: var(--color-accent-ink);
+  font-size: 20px;
+  font-weight: 800;
+  text-align: center;
+}
+
+.scope-explain {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.scope-explain div {
+  border-radius: var(--radius-card);
+  padding: 16px;
+  background: var(--color-paper-2);
+}
+
+.scope-explain span {
+  display: inline-flex;
+  margin-bottom: 8px;
+  border-radius: var(--radius-pill);
+  padding: 4px 9px;
+  background: var(--teal);
+  color: var(--color-accent-ink);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.scope-explain strong {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 16px;
+}
+
+.scope-explain p {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.gwp-table {
+  display: grid;
+  max-width: 360px;
+  margin: 16px 0 10px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+}
+
+.gwp-table div {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.gwp-table div:first-child {
+  background: var(--color-paper-2);
+}
+
+.gwp-table span,
+.gwp-table strong {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--line);
+}
+
+.gwp-table div:last-child span {
+  border-bottom: 0;
+}
+
+.source-note {
+  color: var(--color-muted);
+  font-size: 13px;
+}
+
+/* ==========================================================================
+   Handheld layout — iOS HIG conventions: 16pt gutters, 44pt minimum hit area,
+   17px body, grouped inset lists, a translucent nav bar content scrolls under,
+   and a bottom sheet for detail. The desktop table is restacked into cards so
+   the factor value never sits behind a horizontal scroll.
+   ========================================================================== */
+@media (max-width: 920px) {
+  :root {
+    --m-gutter: 16px;
+    --m-radius: 14px;
+    --m-radius-inner: 12px;
+    --m-tap: 44px;
+    --m-hairline: 0.5px;
+
+    /* One step down for handheld. Only the type tokens move — the --space-*
+       tokens are separate, so spacing and rhythm are untouched. */
+    --text-sm: 13px;
+    --text-md: 17px;
+    --text-xl: 26px;
+  }
+
+  /* Unset text inherits the UA's 16px; bring it down with everything else. */
+  body {
+    font-size: 15px;
+  }
+
+  /* ---- Home as slides: one field per screen, snapping like a deck ---- */
+  body[data-view="home"] {
+    scroll-snap-type: y mandatory;
+  }
+
+  .home-page > section {
+    min-height: 100svh;
+    scroll-snap-align: start;
+    /* Without this a fast flick sails past several fields; `always` makes the
+       scroller stop at every snap point, so one gesture advances exactly one page. */
+    scroll-snap-stop: always;
+    display: grid;
+    align-content: center;
+  }
+
+  /* Split halves are their own screens here, so they need their padding back. */
+  .hp-field.hp-cont {
+    padding-top: var(--field-pad);
+  }
+
+  .hp-prov-tail > div {
+    grid-column: 1;
+  }
+
+  /* Fields whose content genuinely exceeds one screen stay free-scrolling inside
+     themselves; the snap point is still their top edge. */
+  .hp-index,
+  .hp-prov {
+    align-content: start;
+  }
+
+  /* Needs to out-specify `.home-page > section { align-content: center }` (0,1,1),
+     or the credits get centred with everything else instead of settling on the
+     bottom edge. */
+  .home-page > section.hp-door {
+    align-content: stretch;
+  }
+
+  /* ---- Home broadsheet on handheld ---- */
+  :root {
+    --field-inset: var(--m-gutter);
+    --field-pad: clamp(56px, 12vw, 84px);
+  }
+
+  /* .site-header is hidden here, so the cover carries the brand itself. */
+  .hp-mast {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: max(16px, env(safe-area-inset-top)) 0 14px;
+    border-bottom: 1px solid var(--color-hairline-dark);
+  }
+
+  .hp-mast strong {
+    font-family: var(--font-display);
+    font-size: 16px;
+    font-weight: 800;
+  }
+
+  .hp-mast-ver {
+    margin-left: auto;
+    color: var(--color-on-dark-3);
+    font-size: 12px;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .hp-cover {
+    grid-template-rows: auto minmax(30svh, 1fr) auto;
+    min-height: 88svh;
+  }
+
+  .hp-plate-img {
+    background-position: 54% 38%;
+  }
+
+  .hp-cover-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .hp-cover .primary-action {
+    width: 100%;
+    min-height: 54px;
+  }
+
+  .hp-marks {
+    --mark-cols: 26;
+    --mark-gap: 3px;
+  }
+
+  /* Three columns at every width — they are a legend for the mark field above and
+     must be read side by side to compare. */
+  .hp-scopes {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .hp-scopes button {
+    gap: 7px;
+    min-height: 104px;
+    padding: 18px 8px;
+  }
+
+  .hp-scopes button:first-child {
+    padding-left: 0;
+  }
+
+  .hp-scopes .nm {
+    letter-spacing: 0.04em;
+    font-size: 13px;
+  }
+
+  .hp-scopes .ct {
+    font-size: 30px;
+  }
+
+  .hp-scopes .sh {
+    font-size: 12px;
+  }
+
+  .hp-method-head {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .hp-method-head .hp-h2,
+  .hp-lede {
+    grid-column: 1 / -1;
+  }
+
+  /* 使用方法 must hold header + lede + three steps + CTA in one screen. */
+  .hp-method .hp-h2 {
+    margin-bottom: 14px;
+    font-size: 24px;
+  }
+
+  .hp-method .hp-lede {
+    font-size: 15px;
+    line-height: 1.75;
+  }
+
+  .hp-steps {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 14px;
+    margin-top: clamp(20px, 4vw, 32px);
+  }
+
+  .hp-steps li {
+    padding-top: 12px;
+  }
+
+  .hp-steps b {
+    margin-bottom: 4px;
+    font-size: 24px;
+  }
+
+  .hp-steps p {
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  .hp-method .hp-textlink {
+    margin-top: 18px;
+    font-size: 16px;
+  }
+
+  .hp-textlink {
+    display: flex;
+    justify-content: space-between;
+    min-height: 52px;
+  }
+
+  /* All 19 categories on one screen: tighter rows, smaller names. */
+  .hp-index-list {
+    grid-auto-flow: row;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: none;
+  }
+
+  .hp-index-list button {
+    grid-template-columns: 40px minmax(0, 1fr) auto;
+    gap: 0 10px;
+    min-height: 0;
+    padding: 5px var(--m-gutter);
+  }
+
+  .hp-index-list .sc {
+    font-size: 11px;
+  }
+
+  .hp-index-list .nm {
+    font-size: 14px;
+    line-height: 1.3;
+  }
+
+  .hp-index-list .ct {
+    font-size: 14px;
+  }
+
+  .hp-index-list .ct::after {
+    font-size: 11px;
+  }
+
+  .hp-index .hp-h2 {
+    margin-bottom: 16px;
+    font-size: 24px;
+  }
+
+  .hp-index .hp-eyebrow {
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+  }
+
+  .hp-index .hp-foot {
+    margin-top: 12px;
+  }
+
+  .hp-index {
+    padding-top: clamp(36px, 7vw, 56px);
+    padding-bottom: clamp(36px, 7vw, 56px);
+  }
+
+  .hp-prov-grid {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 40px;
+  }
+
+  /* Both halves of 重要说明/数据来源 must hold one screen; the first heading is a
+     full sentence rather than a title, so it sits a step down from --hp-h2. */
+  .hp-prov .hp-h2 {
+    margin-bottom: 16px;
+    font-size: 19px;
+    line-height: 1.55;
+    max-width: none;
+  }
+
+  .hp-note {
+    padding: 18px 0;
+  }
+
+  .hp-note h3 {
+    margin-bottom: 6px;
+    font-size: 17px;
+  }
+
+  .hp-note p {
+    font-size: 14px;
+    line-height: 1.75;
+  }
+
+  .hp-src {
+    padding: 11px 0;
+  }
+
+  .hp-src .ct {
+    font-size: 20px;
+  }
+
+  .hp-src .bar {
+    margin-top: 7px;
+  }
+
+  .hp-door-inner {
+    gap: 24px;
+  }
+
+  .hp-door-mark {
+    width: auto;
+    height: 46px;
+  }
+
+  /* Label column plus six names must hold one line at 390px. */
+  .hp-door-foot {
+    gap: 9px 12px;
+    font-size: 13px;
+  }
+
+  .hp-team-names {
+    flex-wrap: nowrap;
+    gap: 0 9px;
+  }
+
+  /* The tab bar appears on this screen, so leave it a clear strip. */
+  .home-page > section.hp-door {
+    padding-bottom: calc(58px + 22px + env(safe-area-inset-bottom));
+  }
+
+  .detail-headline strong {
+    font-size: var(--text-xl);
+  }
+
+  /* The tab bar plus the scope strip carry navigation; the title bar is dead weight. */
+  .site-header {
+    display: none;
+  }
+
+  .site-header--unused {
+    min-height: 0;
+    gap: 10px;
+    padding: max(6px, env(safe-area-inset-top)) max(var(--m-gutter), env(safe-area-inset-right)) 6px
+      max(var(--m-gutter), env(safe-area-inset-left));
+    background: color-mix(in oklch, var(--color-header) 88%, transparent);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    border-bottom: var(--m-hairline) solid var(--color-header-rule);
+    box-shadow: none;
+  }
+
+  .header-brand {
+    height: auto;
+    min-height: 52px;
+    gap: 10px;
+    padding-left: 0;
+  }
+
+  .header-brand img {
+    width: 26px;
+    height: 32px;
+  }
+
+  /* The 18-character title cannot fit one line beside the auth buttons;
+     hold it to two tidy lines instead of letting it run. */
+  .brand-text strong {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    overflow: hidden;
+    font-size: 13px;
+    line-height: 1.25;
+    white-space: normal;
+  }
+
+  .brand-text small {
+    display: none;
+  }
+
+  /* ---- Shell: filters on top, data next, utility links last ---- */
+  .app-shell {
+    grid-template-columns: minmax(0, 1fr);
+    /* Grid defaults align-content to stretch, so .app-shell's min-height was
+       inflating every row — links rendered 109px tall instead of 44px. */
+    align-content: start;
+  }
+
+  /* Dissolve the sidebar box so its two halves can sit on opposite ends. */
+  .sidebar {
+    display: contents;
+  }
+
+  .main-area {
+    order: 2;
+  }
+
+  /* ---- Scope switcher on top; categories live in the filter sheet ---- */
+  /* A plain title menu: text with an underline marker, scrolls sideways. */
+  .scope-switch {
+    order: 1;
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    padding: env(safe-area-inset-top) var(--m-gutter) 0;
+    border-bottom: var(--m-hairline) solid var(--line);
+    background: var(--color-panel);
+  }
+
+  .scope-switch::-webkit-scrollbar {
+    display: none;
+  }
+
+  .scope-switch button {
+    display: inline-flex;
+    flex: 0 0 auto;
+    align-items: baseline;
+    gap: 5px;
+    min-height: var(--m-tap);
+    border: 0;
+    border-bottom: 2px solid transparent;
+    border-radius: 0;
+    padding: 12px 14px 10px;
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+    white-space: nowrap;
+  }
+
+  .scope-switch span {
+    font-size: 15px;
+    font-weight: 700;
+  }
+
+  .scope-switch em {
+    font-size: 11px;
+    font-style: normal;
+    font-weight: 700;
+    opacity: 0.75;
+  }
+
+  .scope-switch button.active {
+    border-bottom-color: var(--teal);
+    color: var(--ink);
+  }
+
+  .scope-switch button.active span {
+    font-weight: 800;
+  }
+
+  /* The sidebar tree is desktop-only now. */
+  .scope-nav {
+    display: none;
+  }
+
+  /* ---- Category tiles, scoped to whichever range is selected ---- */
+  .category-strip {
+    order: 2;
+    display: block;
+    padding: 12px 0 10px;
+    border-bottom: var(--m-hairline) solid var(--line);
+    background: var(--color-paper-2);
+  }
+
+  .category-strip.hidden {
+    display: none;
+  }
+
+  .category-strip-title {
+    margin: 0 var(--m-gutter) 8px;
+    color: var(--muted);
+    font-size: 12px;
+    font-weight: 800;
+  }
+
+  .category-tiles {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 8px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    padding: 0 var(--m-gutter);
+  }
+
+  .category-tiles::-webkit-scrollbar {
+    display: none;
+  }
+
+  .category-tiles button {
+    display: grid;
+    flex: 0 0 auto;
+    justify-items: center;
+    align-content: start;
+    gap: 3px;
+    width: 76px;
+    min-height: var(--m-tap);
+    border: var(--m-hairline) solid var(--line);
+    border-radius: 10px;
+    padding: 9px 5px 8px;
+    background: var(--color-panel);
+    color: var(--color-ink-2);
+    cursor: pointer;
+  }
+
+  .category-tiles svg {
+    width: 21px;
+    height: 21px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .category-tiles span {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    overflow: hidden;
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1.25;
+    text-align: center;
+  }
+
+  .category-tiles em {
+    color: var(--muted);
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 700;
+  }
+
+  .category-tiles button.active {
+    border-color: var(--teal);
+    background: color-mix(in oklch, var(--teal) 12%, var(--color-panel));
+    color: var(--teal);
+  }
+
+  .category-tiles button.active em {
+    color: var(--teal);
+  }
+
+  /* The range menu and category tiles belong to 因子库 only. The sidebar links are
+     gone entirely — the tab bar and the 我的 page cover every destination. */
+  body:not([data-view="data"]) .scope-switch,
+  body:not([data-view="data"]) .category-strip {
+    display: none;
+  }
+
+  .scope-group {
+    display: contents;
+  }
+
+  .all-factors,
+  .scope-heading {
+    order: 1;
+    justify-content: flex-start;
+    gap: 6px;
+    width: auto;
+    min-height: var(--m-tap);
+    border-radius: var(--radius-pill);
+    padding: 0 14px;
+    font-size: 13px;
+  }
+
+  .all-factors {
+    border-color: transparent;
+  }
+
+  .all-factors strong,
+  .scope-heading strong {
+    color: var(--muted);
+    font-size: 12px;
+  }
+
+  .all-factors.active strong,
+  .scope-heading.active strong {
+    color: var(--color-accent-ink);
+  }
+
+  /* Second row: categories of whichever scope is currently selected. */
+  .category-list {
+    order: 2;
+    display: none;
+    width: 100%;
+    padding-left: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .category-list::-webkit-scrollbar {
+    display: none;
+  }
+
+  .scope-group:has(.active) .category-list {
+    display: flex;
+    gap: 8px;
+  }
+
+  .category-link {
+    flex: 0 0 auto;
+    grid-template-columns: auto auto;
+    width: auto;
+    min-height: var(--m-tap);
+    border: var(--m-hairline) solid var(--line);
+    border-left-width: var(--m-hairline);
+    border-radius: var(--radius-pill);
+    padding: 0 12px;
+    background: var(--color-panel);
+    white-space: nowrap;
+  }
+
+  .category-link.active {
+    border-color: var(--teal);
+    border-left-color: var(--teal);
+  }
+
+  .category-link span {
+    overflow-wrap: normal;
+  }
+
+  /* ---- App-style bottom tab bar ---- */
+  /* On the home page it stays out of the way until the last screen is reached. */
+  .tab-bar {
+    transform: translateY(0);
+    transition:
+      transform var(--dur-short) var(--ease-out),
+      opacity var(--dur-short) var(--ease-out);
+  }
+
+  body[data-view="home"]:not(.tabs-visible) .tab-bar {
+    transform: translateY(100%);
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  body[data-view="home"]:not(.tabs-visible) .search-dock {
+    display: none;
+  }
+
+  .tab-bar {
+    position: fixed;
+    inset: auto 0 0 0;
+    z-index: 30;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    padding-bottom: env(safe-area-inset-bottom);
+    border-top: var(--m-hairline) solid var(--line);
+    background: color-mix(in oklch, var(--color-panel) 93%, transparent);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+  }
+
+  .tab-bar button {
+    display: grid;
+    justify-items: center;
+    align-content: center;
+    gap: 3px;
+    min-height: 52px;
+    border: 0;
+    padding: 6px 2px 8px;
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+  }
+
+  .tab-bar svg {
+    width: 24px;
+    height: 24px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.7;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .tab-bar span {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0;
+  }
+
+  .tab-bar button.active {
+    color: var(--teal);
+  }
+
+  .tab-bar button.active svg {
+    stroke-width: 2.1;
+  }
+
+  /* Keep the last rows clear of the bar. */
+  .view-panel {
+    padding-bottom: calc(152px + env(safe-area-inset-bottom));
+  }
+
+  .site-footer {
+    padding-bottom: calc(84px + env(safe-area-inset-bottom));
+  }
+
+  /* 首页 and Q&A now live in the tab bar. */
+  #sidebarHomeLink,
+  .utility-link[data-page="Q&A"] {
+    display: none;
+  }
+
+  /* Filter chips, search and the back link belong to the 因子库 tab only. */
+  body[data-view="content"] .scope-nav,
+  body[data-view="content"] .head-actions,
+  body[data-view="content"] .back-link {
+    display: none;
+  }
+
+  body[data-view="content"] .data-head {
+    padding-bottom: 4px;
+  }
+
+  body[data-view="data"] .view-panel {
+    padding-top: 12px;
+  }
+
+  /* 46px + 16px for a three-digit number is 17% of a 390px screen. Over a
+     378-entry list that is a lot of measure to give away. */
+  .reference-list li {
+    grid-template-columns: 28px minmax(0, 1fr);
+    gap: 12px;
+  }
+
+  .data-tools {
+    margin-bottom: 8px;
+  }
+
+  /* ---- Utility links move below the data, as a grouped list ---- */
+  /* Every destination now lives in the tab bar or on the 我的 page. */
+  .sidebar-footer {
+    display: none;
+  }
+
+  .utility-links {
+    gap: 0;
+    margin-bottom: 0;
+    border: var(--m-hairline) solid var(--line);
+    border-radius: var(--m-radius-inner);
+    overflow: hidden;
+    background: var(--color-panel);
+  }
+
+  .utility-link {
+    width: 100%;
+    min-height: var(--m-tap);
+    padding: 0 14px;
+    border-bottom: var(--m-hairline) solid var(--line);
+    border-radius: 0;
+    color: var(--teal);
+    font-size: 15px;
+  }
+
+  .utility-links .utility-link:last-child {
+    border-bottom: 0;
+  }
+
+  /* ---- Large title + iOS search field ---- */
+  .data-head {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+    padding: 16px var(--m-gutter) 12px;
+    border-bottom: 0;
+    background: transparent;
+  }
+
+  .data-head h2 {
+    margin: 4px 0 0;
+    font-size: 28px;
+    line-height: 1.2;
+  }
+
+  .head-actions {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 10px;
+  }
+
+  /* No bar, no rule, no blur — just a tall fade that dissolves the list into the
+     page before it reaches the field, leaving the pill floating on clean ground.
+     The dock itself is click-through; only the input takes pointer events. */
+  .search-dock {
+    position: fixed;
+    inset: auto 0 calc(58px + env(safe-area-inset-bottom)) 0;
+    z-index: 25;
+    height: 46svh;
+    grid-template-columns: minmax(0, 1fr);
+    align-content: end;
+    padding: 0 var(--m-gutter) 12px;
+    border-top: 0;
+    background: linear-gradient(
+      180deg,
+      transparent 0%,
+      color-mix(in oklch, var(--paper) 45%, transparent) 42%,
+      color-mix(in oklch, var(--paper) 88%, transparent) 66%,
+      var(--paper) 80%,
+      var(--paper) 100%
+    );
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    pointer-events: none;
+  }
+
+  .search-dock .search-box {
+    pointer-events: auto;
+  }
+
+  #searchButton {
+    width: 38px;
+    height: 38px;
+  }
+
+  /* Only the factor list has a search dock. */
+  body:not([data-view="data"]) .search-dock {
+    display: none;
+  }
+
+  /* Anything typable stays >= 16px or iOS Safari zooms the viewport on focus. */
+  .search-box input {
+    min-height: var(--m-tap);
+    border: 0;
+    border-radius: var(--radius-pill);
+    padding: 0 50px 0 18px;
+    background: var(--color-paper-3);
+    font-size: 16px;
+  }
+
+  .auth-body input {
+    font-size: 16px;
+  }
+
+  .head-actions button {
+    justify-self: start;
+    min-height: var(--m-tap);
+    border-radius: var(--radius-pill);
+    padding: 0 18px;
+    font-size: 14px;
+  }
+
+  .view-panel {
+    padding: 0 var(--m-gutter) calc(152px + env(safe-area-inset-bottom));
+  }
+
+  .unit-control {
+    margin-bottom: 12px;
+  }
+
+  .unit-control button {
+    min-height: var(--m-tap);
+    font-size: 14px;
+  }
+
+  /* ---- Factor table restacked as cards ---- */
+  .table-wrap {
+    overflow: visible;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    background-image: none;
+  }
+
+  table,
+  tbody {
+    display: block;
+    min-width: 0;
+    width: 100%;
+  }
+
+  thead {
+    display: none;
+  }
+
+  tbody tr,
+  tbody tr:nth-child(even) {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 3px 8px;
+    margin-bottom: 8px;
+    border: var(--m-hairline) solid var(--line);
+    border-radius: 8px;
+    padding: 10px 56px 10px 12px;
+    background: var(--color-panel);
+  }
+
+  tbody tr:active {
+    background: var(--color-paper-2);
+  }
+
+  td {
+    display: block;
+    border-bottom: 0;
+    padding: 0;
+    font-size: 13px;
+    line-height: 1.4;
+  }
+
+  td.nowrap-col,
+  td.clamp {
+    min-width: 0;
+    max-width: none;
+    white-space: normal;
+  }
+
+  td[data-col="source"] {
+    order: 3;
+    flex: 1 0 100%;
+    font-size: 15px;
+    font-weight: 600;
+  }
+
+  td[data-col="factor"] {
+    order: 4;
+  }
+
+  td[data-col="factor"] .number {
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  td[data-col="unit"] {
+    order: 5;
+    color: var(--color-ink-2);
+    font-size: 14px;
+  }
+
+  /* Cards stay to the payload: source, value, unit. Remarks and category are one
+     tap away in the detail sheet. */
+  td[data-col="notes"],
+  td[data-col="category"] {
+    display: none;
+  }
+
+  /* 区域 is the ONLY thing separating 范围二's rows — every one of them reads 电力.
+     Hiding it made five different grid factors look like the same record, so it
+     stays, demoted to a caption under the source name. */
+  td[data-col="feature"] {
+    order: 4;
+    flex: 1 0 100%;
+    /* The desktop column cap (max-width: 220px) survives into the card layout and
+       beats flex-basis: 100%, leaving 68px free on the caption line. A short value
+       like 2060 then packs in beside the caption while 2315.06 wraps — the number
+       changed position from row to row. Reset it so the caption owns its line. */
+    max-width: none;
+    margin-top: -1px;
+    color: var(--muted);
+    font-size: 12px;
+  }
+
+  td[data-col="feature"]:empty,
+  td[data-col="feature"]:has(.muted) {
+    display: none;
+  }
+
+  td[data-col="feature"]::before {
+    content: none;
+  }
+
+  td[data-col="factor"] {
+    order: 5;
+  }
+
+  td[data-col="unit"] {
+    order: 6;
+  }
+
+  /* Actions become a vertical rail pinned to the right edge of the card. */
+  td[data-col="actions"] {
+    position: absolute;
+    top: 50%;
+    right: 8px;
+    transform: translateY(-50%);
+  }
+
+  td.actions,
+  th.actions {
+    width: auto;
+  }
+
+  .row-actions {
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .row-action {
+    justify-content: center;
+    width: 46px;
+    min-height: 30px;
+    padding: 0;
+    font-size: 12px;
+  }
+
+  .row-action[data-action="detail"] {
+    display: none;
+  }
+
+  .row-action.fav {
+    font-size: 13px;
+  }
+
+  .row-action.fav i {
+    display: none;
+  }
+
+  /* Group headings are section labels between cards, not cards themselves. */
+  .group-row,
+  .group-row:nth-child(even) {
+    display: block;
+    margin: 20px 0 10px;
+    border: 0;
+    border-radius: 0;
+    padding: 0;
+    background: transparent;
+  }
+
+  tbody .group-row:first-child {
+    margin-top: 4px;
+  }
+
+  .group-row td {
+    padding: 0 0 0 10px;
+    border: 0;
+    background: transparent;
+    box-shadow: inset 3px 0 0 var(--teal);
+  }
+
+  .group-row.s2 td {
+    box-shadow: inset 3px 0 0 var(--amber);
+  }
+
+  .group-row.s3 td {
+    box-shadow: inset 3px 0 0 var(--coral);
+  }
+
+  .group-row span {
+    font-size: 16px;
+  }
+
+  /* ---- Detail as a bottom sheet ---- */
+  dialog,
+  #authDialog {
+    position: fixed;
+    inset: auto 0 0 0;
+    width: 100%;
+    max-width: none;
+    max-height: 88dvh;
+    margin: 0;
+    border: 0;
+    border-radius: var(--space-md) var(--space-md) 0 0;
+  }
+
+  .dialog-head {
+    position: relative;
+    padding: 22px var(--m-gutter) var(--space-md);
+  }
+
+  .dialog-head::before {
+    content: "";
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 36px;
+    height: 5px;
+    border-radius: var(--radius-pill);
+    background: var(--color-rule-strong);
+  }
+
+  #closeDialog,
+  #closeAuthDialog {
+    width: var(--m-tap);
+    height: var(--m-tap);
+  }
+
+  .detail-body,
+  .auth-body {
+    padding: var(--m-gutter) var(--m-gutter) calc(var(--m-gutter) + env(safe-area-inset-bottom));
+  }
+
+  .detail-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+    overflow: hidden;
+    border: var(--m-hairline) solid var(--line);
+    border-radius: var(--m-radius-inner);
+    background: var(--color-panel);
+  }
+
+  .detail-item {
+    display: grid;
+    grid-template-columns: minmax(88px, 36%) minmax(0, 1fr);
+    gap: 12px;
+    align-items: baseline;
+    border: 0;
+    border-bottom: var(--m-hairline) solid var(--line);
+    border-radius: 0;
+    padding: 12px 14px;
+  }
+
+  .detail-grid .detail-item:last-child {
+    border-bottom: 0;
+  }
+
+  .detail-item.wide {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 6px;
+  }
+
+  .formula-text {
+    overflow-wrap: anywhere;
+  }
+
+  .detail-item span {
+    margin: 0;
+  }
+
+  .detail-headline {
+    padding: 14px var(--m-gutter);
+    border-radius: var(--m-radius-inner);
+  }
+
+  .favorite-toggle {
+    width: 100%;
+    min-height: 50px;
+    border-radius: var(--m-radius-inner);
+    font-size: 15px;
+  }
+
+  #authSubmit {
+    min-height: 50px;
+    border-radius: var(--m-radius-inner);
+    font-size: 16px;
+  }
+
+  /* ---- Account / profile / settings ---- */
+  .account-menu {
+    padding: 8px 8px calc(16px + env(safe-area-inset-bottom));
+  }
+
+  .account-item {
+    min-height: 56px;
+    border-radius: var(--m-radius-inner);
+    padding: 10px 14px;
+  }
+
+  .account-item span {
+    font-size: 16px;
+  }
+
+  .account-item em {
+    font-size: 12px;
+  }
+
+  .profile-list,
+  .settings-list {
+    border-radius: var(--m-radius);
+  }
+
+  .profile-row {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2px;
+  }
+
+  .settings-row {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+  }
+
+  .settings-options {
+    justify-content: flex-start;
+  }
+
+  .settings-options button {
+    min-height: var(--m-tap);
+    padding: 0 16px;
+    font-size: 14px;
+  }
+
+  /* ---- Content pages ---- */
+  .info-hero,
+  .info-grid,
+  .scope-explain {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .back-link {
+    justify-content: center;
+    width: 100%;
+    min-height: var(--m-tap);
+    border-radius: var(--m-radius-inner);
+    font-size: 15px;
+  }
+
+  .qa-index a {
+    min-height: var(--m-tap);
+    border-radius: var(--radius-pill);
+    padding: 0 14px;
+  }
+
+  .reference-item p {
+    font-size: 15px;
+  }
+
+  /* Reading view: wider gutters would fight the text, so only the type changes. */
+  /* No site header on handheld, so the topic bar pins to the very top — flush at 0,
+     exactly like .scope-switch on the library. The panel's own top padding would
+     otherwise push it down 24px and make the bar read as taller. */
+  body[data-page="Q&A"] .view-panel {
+    padding-top: 0;
+  }
+
+  .qa-jump {
+    top: 0;
+    background: var(--color-panel);
+    margin: 0 calc(var(--m-gutter) * -1) var(--space-sm);
+    padding: 0 var(--m-gutter);
+  }
+
+  /* Dimensionally identical to .scope-switch button so the two nav bars read as one control. */
+  .qa-jump button {
+    min-height: var(--m-tap);
+    padding: 12px 14px 10px;
+    font-size: 15px;
+  }
+
+  .qa-jump button span {
+    font-size: 15px;
+    font-weight: 700;
+  }
+
+  .qa-jump button em {
+    font-size: 11px;
+    font-weight: 700;
+  }
+
+  .qa-chapter {
+    scroll-margin-top: 52px;
+  }
+
+  .qa-chapter-head h4 {
+    font-size: 22px;
+  }
+
+  .qa-entry h5 {
+    font-size: 15px;
+  }
+
+  .qa-entry p {
+    font-size: 15px;
+    line-height: 1.9;
+  }
+
+  .reference-item,
+  .info-hero,
+  .info-section,
+  .info-card,
+  .clean-content p,
+  .clean-row {
+    border-radius: var(--m-radius);
+  }
+}
+
+/* styles.css had no reduced-motion block; the home reveal needs one. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .hp-src .bar {
+    clip-path: none !important;
+  }
+}
+
+  .active-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.active-filters.hidden {
+  display: none;
+}
+
+.filter-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 32px;
+  border: 1px solid var(--teal);
+  border-radius: var(--radius-pill);
+  padding: 0 12px;
+  background: color-mix(in oklch, var(--teal) 10%, var(--color-panel));
+  color: var(--teal);
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.filter-chip em {
+  font-size: 15px;
+  font-style: normal;
+}
+
+
+.load-more {
+  display: grid;
+  gap: 8px;
+  justify-items: center;
+  padding: 20px 0 4px;
+}
+
+.load-more.hidden {
+  display: none;
+}
+
+.load-more button {
+  min-height: 40px;
+  border: 1px solid var(--teal);
+  border-radius: var(--radius-pill);
+  padding: 0 22px;
+  background: var(--color-panel);
+  color: var(--teal);
+  cursor: pointer;
+  font-weight: 800;
+}
+
+.load-more span {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.filter-body {
+  display: grid;
+  gap: 6px;
+  padding: var(--space-md);
+  overflow: auto;
+}
+
+.filter-group h4 {
+  margin: 14px 0 6px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.filter-option {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 12px;
+  align-items: center;
+  width: 100%;
+  min-height: 44px;
+  border: 0;
+  border-radius: var(--radius-control);
+  padding: 8px 12px;
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+  text-align: left;
+}
+
+.filter-option em {
+  color: var(--muted);
+  font-size: 13px;
+  font-style: normal;
+}
+
+.filter-option.active {
+  background: var(--teal);
+  color: var(--color-accent-ink);
+}
+
+.filter-option.active em {
+  color: color-mix(in oklch, var(--color-accent-ink) 78%, transparent);
+}
+
+@media (hover: hover) {
+  .filter-option:hover:not(.active) {
+    background: var(--color-paper-2);
+  }
+}
+
+
+
+/* ==========================================================================
+   The account sheets, in the broadsheet language: hairlines and rhythm
+   instead of enclosing cards.
+   ========================================================================== */
+
+/* ---- shared sheet layout for 个人信息 / 系统设置 ---- */
+.sheet {
+  max-width: var(--read-max);
+}
+
+.sheet-eyebrow {
+  margin: 0 0 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--color-rule);
+  color: var(--color-accent);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+.sheet-title {
+  margin: 0 0 var(--space-md);
+  font-family: var(--font-display);
+  font-size: clamp(28px, 3vw, 44px);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: 0;
+  overflow-wrap: anywhere;
+}
+
+/* `ch` is the width of "0" — about half an em — so a ch-measure on CJK text sets
+   a line half as long as it reads, which is what left orphans like “藏。” on their
+   own line. Measures below are in em, where 1em = 1 CJK character. */
+.sheet-lede {
+  max-width: 34em;
+  margin: 0 0 var(--space-xl);
+  color: var(--color-ink-2);
+  font-size: 16px;
+  line-height: 1.85;
+}
+
+.sheet-figure {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: var(--space-md);
+}
+
+.sheet-figure b {
+  color: var(--color-accent);
+  font-family: var(--font-display);
+  font-size: clamp(56px, 7vw, 96px);
+  font-weight: 800;
+  line-height: 0.9;
+  font-variant-numeric: tabular-nums;
+}
+
+.sheet-figure span {
+  color: var(--color-ink-2);
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 700;
+}
+
+/* ---- sheet sections ----
+   Hairline-separated blocks, the same device the home fields use. This replaces
+   the legacy .info-card / .team-* families on 基本信息 and 建设团队, which were
+   the last two pages still drawing enclosing boxes. */
+.sheet-section {
+  padding: var(--space-lg) 0;
+  border-top: 1px solid var(--color-rule);
+}
+
+.sheet-section:last-child {
+  border-bottom: 1px solid var(--color-rule);
+}
+
+/* 建设团队 now opens on its first section, so its top hairline would hang at the
+   very top of the page with nothing above it — drop it (keep the top padding for
+   breathing room). */
+.team-sheet .sheet-section:first-child {
+  border-top: 0;
+}
+
+.sheet-section > h4 {
+  margin: 0 0 10px;
+  font-family: var(--font-display);
+  font-size: 21px;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+.sheet-section p {
+  max-width: 36em;
+  margin: 0 0 10px;
+  color: var(--color-ink-2);
+  font-size: 15px;
+  line-height: 1.85;
+}
+
+.sheet-section p:last-child {
+  margin-bottom: 0;
+}
+
+.sheet-section ul {
+  max-width: 36em;
+  margin: 0;
+  padding-left: 1.1em;
+  color: var(--color-ink-2);
+  font-size: 15px;
+  line-height: 1.85;
+}
+
+.sheet-section li + li {
+  margin-top: 6px;
+}
+
+/* The formula reads as a line of type, not a filled black bar. */
+.sheet-formula {
+  margin: var(--space-md) 0;
+  padding: 0;
+  color: var(--color-accent);
+  font-family: var(--font-display);
+  font-size: clamp(22px, 2.2vw, 32px);
+  font-weight: 800;
+  letter-spacing: 0;
+}
+
+.sheet-defs {
+  display: grid;
+  gap: 0;
+  margin-top: var(--space-md);
+}
+
+.sheet-defs > div {
+  display: grid;
+  grid-template-columns: 92px minmax(0, 1fr);
+  gap: 0 18px;
+  padding: 14px 0;
+  border-top: 1px solid var(--color-rule);
+}
+
+.sheet-defs dt {
+  color: var(--color-accent);
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.sheet-defs dd {
+  max-width: 34em;
+  margin: 0;
+  color: var(--color-ink-2);
+  font-size: 15px;
+  line-height: 1.85;
+}
+
+.sheet-defs dd b {
+  display: block;
+  margin-bottom: 2px;
+  color: var(--color-ink);
+  font-size: 15px;
+  font-weight: 700;
+}
+
+/* Hairline rows, no table chrome — same treatment as .reference-list. */
+.sheet-table {
+  display: grid;
+  max-width: 26em;
+  margin: var(--space-md) 0;
+}
+
+.sheet-table > div {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  padding: 9px 0;
+  border-top: 1px solid var(--color-rule);
+  font-size: 15px;
+}
+
+.sheet-table > div:last-child {
+  border-bottom: 1px solid var(--color-rule);
+}
+
+.sheet-table dt {
+  color: var(--color-ink-2);
+}
+
+.sheet-table dd {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+.sheet-table .head dt,
+.sheet-table .head dd {
+  color: var(--color-muted-2);
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+/* Needs the .sheet-section prefix: the generic `.sheet-section ul` rule is
+   (0,1,1) and would otherwise keep its 36em prose measure and 1.1em list
+   indent, which wrapped six names onto two rows. */
+.sheet-section ul.sheet-roster {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0 var(--space-xl);
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sheet-roster li {
+  padding: 10px 0;
+  font-family: var(--font-display);
+  font-size: clamp(20px, 2vw, 28px);
+  font-weight: 800;
+  letter-spacing: 0;
+}
+
+.sheet-source {
+  max-width: 42em;
+  margin: var(--space-md) 0 0;
+  color: var(--color-muted-2);
+  font-size: 12px;
+  line-height: 1.75;
+}
+
+.sheet-split {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-bottom: var(--space-xl);
+  border-top: 1px solid var(--color-rule);
+}
+
+.sheet-split div {
+  padding: 14px 0;
+}
+
+.sheet-split div + div {
+  border-left: 1px solid var(--color-rule);
+  padding-left: 16px;
+}
+
+.sheet-split dt {
+  color: var(--color-muted-2);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.sheet-split dd {
+  margin: 4px 0 0;
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+.sheet-rows {
+  display: grid;
+  margin: 0 0 var(--space-lg);
+}
+
+.sheet-rows div {
+  display: grid;
+  grid-template-columns: minmax(120px, 26%) minmax(0, 1fr);
+  gap: 16px;
+  align-items: baseline;
+  padding: 14px 0;
+  border-top: 1px solid var(--color-rule);
+}
+
+.sheet-rows div:last-child {
+  border-bottom: 1px solid var(--color-rule);
+}
+
+.sheet-rows dt {
+  color: var(--color-muted-2);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.sheet-rows dd {
+  margin: 0;
+  color: var(--color-ink);
+  font-size: 15px;
+  overflow-wrap: anywhere;
+}
+
+.sheet-note {
+  max-width: 42em;
+  margin: 0;
+  color: var(--color-muted-2);
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.sheet-settings {
+  display: grid;
+}
+
+.sheet-settings section {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 20px;
+  align-items: center;
+  padding: 20px 0;
+  border-top: 1px solid var(--color-rule);
+}
+
+.sheet-settings section:last-child {
+  border-bottom: 1px solid var(--color-rule);
+}
+
+.sheet-setting-copy strong {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 16px;
+}
+
+.sheet-setting-copy p {
+  max-width: 40em;
+  margin: 0;
+  color: var(--color-muted-2);
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.sheet-options {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: flex-end;
+}
+
+.sheet-options button {
+  min-height: 36px;
+  border: 1px solid var(--color-rule);
+  border-radius: var(--radius-pill);
+  padding: 0 14px;
+  background: transparent;
+  color: var(--color-ink-2);
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.sheet-options button.active {
+  border-color: var(--color-accent);
+  background: var(--color-accent);
+  color: var(--color-accent-ink);
+}
+
+@media (max-width: 920px) {
+  .sheet-title {
+    font-size: 26px;
+  }
+
+  .sheet-lede {
+    font-size: 15px;
+  }
+
+  .sheet-figure b {
+    font-size: 56px;
+  }
+
+  .sheet-split dd {
+    font-size: 22px;
+  }
+
+  .sheet-rows div {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 3px;
+  }
+
+  .sheet-settings section {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+  }
+
+  .sheet-options {
+    justify-content: flex-start;
+  }
+
+  .sheet-options button {
+    min-height: var(--m-tap);
+    padding: 0 16px;
+    font-size: 14px;
+  }
+}
+
+.account-group-label {
+  margin: var(--space-lg) 0 8px;
+  color: var(--color-muted-2);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+
+/* ==========================================================================
+   DESKTOP REDESIGN — five content pages, full page width.
+   One trailing @media(min-width:921px) block on purpose: it wins every
+   source-order tie against .sheet (4249), #contentPage (2200) and the global
+   .s1/.s2/.s3 (1990). Page-scoped class names only — never bare s1/s2/s3.
+   The @media(max-width:920px) handheld block is untouched; anything that would
+   change the phone is either desktop-only here or hidden at ≤920px.
+   ========================================================================== */
+
+/* Base (all widths): the settings group labels are a desktop grouping affordance,
+   so they are hidden by default — the handheld page keeps its flat list. */
+.set-group {
+  display: none;
+}
+
+/* The 个人信息 collection panel (626-mark grid) is a desktop visualization; hidden
+   by default so the phone keeps its figure + scope-split stack unchanged. */
+.pd-collection {
+  display: none;
+}
+
+/* Q&A: the rail + body wrappers dissolve on handheld (display:contents) so the
+   sticky-tabs + chapters flow exactly as today; the chapter index is desktop-only. */
+.qa-rail,
+.qa-body {
+  display: contents;
+}
+
+.qa-toc {
+  display: none;
+}
+
+/* 建设团队 — author roster with scope-tagged contributions. Base rules stack on
+   handheld; desktop widens into a two-column list. Scope chips use ta-s1/2/3
+   (never the global s1/s2/s3), and the colour is a dot beside ink text, so no
+   text ever sits on a coloured fill. */
+.sheet-h4-en {
+  margin-left: 8px;
+  color: var(--color-muted-2);
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.team-authors {
+  display: grid;
+}
+
+.team-author {
+  padding: 16px 0;
+  border-top: 1px solid var(--color-rule);
+}
+
+.ta-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px 16px;
+  margin-bottom: 8px;
+}
+
+.ta-name {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.ta-scopes {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.ta-scope {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--color-muted-2);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.ta-scope::before {
+  content: "";
+  width: 9px;
+  height: 9px;
+  border-radius: 1px;
+}
+
+.ta-scope.ta-s1::before {
+  background: var(--color-accent);
+}
+
+.ta-scope.ta-s2::before {
+  background: var(--color-accent-2);
+}
+
+.ta-scope.ta-s3::before {
+  background: var(--color-accent-3);
+}
+
+.ta-work {
+  max-width: 40em;
+  margin: 0;
+  color: var(--color-ink-2);
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+@media (min-width: 921px) {
+  /* Width lever: the content column had a hard cap, so on a wide display every
+     page left a dead strip. Remove the cap and let the panel gutters grow with
+     the viewport; each page then fills fluidly (data/list pages add columns via
+     auto-fit) or centres its reading column (Q&A / prose). Reflows live on resize
+     — no fixed breakpoints. */
+  #contentPage {
+    max-width: none;
+  }
+
+  body[data-view="content"] .view-panel {
+    padding-inline: clamp(40px, 4vw, 200px);
+  }
+
+  /* ---- 系统设置 ---- grouped, two settings per row. There are only six
+     settings (two per group), so more than two columns would leave empty grid
+     slots; instead the sheet holds a comfortable measure and centres on a wide
+     display rather than stranding two blocks at the far left. */
+  .sheet.settings-sheet {
+    max-width: 76rem;
+    margin-inline: auto;
+  }
+
+  .sheet.settings-sheet .sheet-settings {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: var(--space-2xl);
+    align-items: start;
+  }
+
+  .set-group {
+    display: block;
+    grid-column: 1 / -1;
+    margin: var(--space-lg) 0 0;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--color-rule);
+    color: var(--color-accent);
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+  }
+
+  .set-group:first-child {
+    margin-top: var(--space-xs);
+  }
+
+  /* Vertical block: override the base 1fr/auto row and its hairline (the group
+     rule above is the divider now). */
+  .sheet.settings-sheet .sheet-settings section {
+    display: block;
+    padding: 18px 0 6px;
+    border-top: 0;
+  }
+
+  .sheet.settings-sheet .sheet-settings section:last-child {
+    border-bottom: 0;
+  }
+
+  .sheet.settings-sheet .sheet-setting-copy {
+    margin-bottom: 14px;
+  }
+
+  .sheet.settings-sheet .sheet-setting-copy strong {
+    font-size: 17px;
+  }
+
+  .sheet.settings-sheet .sheet-setting-copy p {
+    max-width: 32em;
+    font-size: 13px;
+  }
+
+  .sheet.settings-sheet .sheet-options {
+    justify-content: flex-start;
+  }
+
+  /* ---- 个人信息 ---- personal dashboard. Left summary (big figure + scope
+     split), right the 626-mark collection grid — the site's home-page mark
+     signature reused so 收藏 reads against the whole library at a glance. Fills
+     the full width; the mark grid auto-fills more columns as the window grows. */
+  .sheet.profile-dash {
+    max-width: none;
+  }
+
+  .profile-dash .pd-top {
+    display: grid;
+    grid-template-columns: 320px minmax(0, 1fr);
+    gap: 64px;
+    align-items: start;
+    margin-bottom: var(--space-xl);
+  }
+
+  /* Account rows are a label/value list — hold them to a reading measure so the
+     value doesn't drift a screen away from its label on a wide display. */
+  .profile-dash .sheet-rows,
+  .profile-dash .sheet-note {
+    max-width: 60em;
+  }
+
+  .profile-dash .pd-summary .sheet-figure,
+  .profile-dash .pd-summary .sheet-split {
+    margin-bottom: var(--space-md);
+  }
+
+  .profile-dash .pd-collection {
+    display: block;
+  }
+
+  .pd-collection-cap {
+    margin: 0 0 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--color-rule);
+    color: var(--color-muted-2);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+  }
+
+  .pd-marks {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 12px);
+    gap: 4px;
+  }
+
+  /* Uncollected = faint hairline tint (texture, not data); collected lights in
+     the light-ground scope colour. pd-s1/2/3 are private to this page. */
+  .pd-marks i {
+    width: 12px;
+    height: 12px;
+    border-radius: 1px;
+    background: var(--color-rule);
+  }
+
+  .pd-marks i.pd-s1.pd-on {
+    background: var(--color-accent);
+  }
+
+  .pd-marks i.pd-s2.pd-on {
+    background: var(--color-accent-2);
+  }
+
+  .pd-marks i.pd-s3.pd-on {
+    background: var(--color-accent-3);
+  }
+
+  .pd-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 28px;
+    margin-top: var(--space-lg);
+  }
+
+  .pd-leg {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+  }
+
+  .pd-sw {
+    width: 10px;
+    height: 10px;
+    border-radius: 1px;
+    align-self: center;
+  }
+
+  .pd-sw.pd-s1 {
+    background: var(--color-accent);
+  }
+
+  .pd-sw.pd-s2 {
+    background: var(--color-accent-2);
+  }
+
+  .pd-sw.pd-s3 {
+    background: var(--color-accent-3);
+  }
+
+  .pd-leg dt {
+    color: var(--color-ink-2);
+    font-size: 13px;
+  }
+
+  .pd-leg dd {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ---- Q&A ---- sticky left rail (scope filter + chapter index) beside the
+     reading body. A reading page can't use 2560px of line length, so instead of
+     stretching it fills only as wide as rail + a readable body and CENTRES that
+     pair (justify-content) — on any display it sits balanced, never stranded at
+     the left with a dead strip. */
+  .qa-reader {
+    display: grid;
+    /* Body track IS the reading measure, so chapter-header dividers and the
+       entries under them share one edge — no rule hanging past its content.
+       Centre with max-width + margin, NOT justify-content: the latter lets the
+       minmax(0,48em) body track collapse to its content width instead of filling
+       to 48em. On narrow screens the max-width is slack and minmax shrinks the
+       body, so nothing overflows. */
+    grid-template-columns: 300px minmax(0, 48em);
+    column-gap: clamp(48px, 5vw, 88px);
+    align-items: start;
+    max-width: calc(300px + 48em + 88px);
+    margin-inline: auto;
+  }
+
+  /* Match the reader's centring so the back link aligns with the rail edge
+     rather than floating at the far left on a wide display. */
+  /* rem, not em: the reader's 48em resolves against its 16px, the link's own
+     font is 14px — matching in rem keeps the two centred on the same axis. */
+  body[data-page="Q&A"] .back-link {
+    display: flex;
+    width: 100%;
+    max-width: calc(300px + 48rem + 88px);
+    margin-inline: auto;
+    padding-left: 0;
+  }
+
+  .qa-rail {
+    display: block;
+    position: sticky;
+    top: 96px;
+    align-self: start;
+    max-height: calc(100vh - 112px);
+    overflow-y: auto;
+    scrollbar-width: none;
+  }
+
+  .qa-rail::-webkit-scrollbar {
+    display: none;
+  }
+
+  .qa-body {
+    display: block;
+    min-width: 0;
+  }
+
+  /* Filter becomes a vertical list; drop the sticky tab-strip treatment. */
+  .qa-reader .qa-jump {
+    position: static;
+    top: auto;
+    z-index: auto;
+    flex-direction: column;
+    gap: 2px;
+    overflow: visible;
+    margin-bottom: var(--space-lg);
+    border-bottom: 0;
+    background: none;
+  }
+
+  .qa-reader .qa-jump button {
+    justify-content: flex-start;
+    gap: 8px;
+    width: 100%;
+    padding: 9px 12px;
+    border-bottom: 0;
+    border-left: 2px solid transparent;
+    font-size: 14px;
+  }
+
+  .qa-reader .qa-jump button.active {
+    border-bottom-color: transparent;
+    border-left-color: var(--color-accent);
+    background: color-mix(in oklch, var(--color-accent) 8%, transparent);
+  }
+
+  .qa-reader .qa-jump button em {
+    margin-left: auto;
+    opacity: 1;
+    color: var(--color-muted-2);
+  }
+
+  /* Chapter index. */
+  .qa-toc {
+    display: block;
+    margin: 0;
+    padding: var(--space-md) 0 0;
+    border-top: 1px solid var(--color-rule);
+    list-style: none;
+    counter-reset: none;
+  }
+
+  .qa-toc a {
+    display: grid;
+    grid-template-columns: 22px minmax(0, 1fr) auto;
+    gap: 10px;
+    align-items: baseline;
+    padding: 7px 12px;
+    border-left: 2px solid transparent;
+    color: var(--color-ink-2);
+    text-decoration: none;
+    font-size: 13px;
+  }
+
+  .qa-toc-no {
+    color: var(--color-muted-2);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .qa-toc-name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .qa-toc em {
+    color: var(--color-muted-2);
+    font-size: 11px;
+    font-style: normal;
+    font-weight: 700;
+  }
+
+  .qa-toc a.is-current {
+    border-left-color: var(--color-accent);
+    color: var(--color-ink);
+  }
+
+  @media (hover: hover) {
+    .qa-toc a:hover {
+      color: var(--color-ink);
+    }
+  }
+
+  /* Reading body: chapter headers span the full body column as dividers; the
+     collapsible entries keep a comfortable ~44em reading measure. */
+  .qa-reader .qa-chapter {
+    scroll-margin-top: 96px;
+    padding-top: 0;
+    margin-bottom: var(--space-2xl);
+  }
+
+  .qa-reader .qa-chapter:first-child {
+    margin-top: 4px;
+  }
+
+  /* ---- 建设团队 ---- full-width masthead. The authors tile an auto-fit grid of
+     stacked cards (name + scope tags over the contribution): one column near
+     1300px, two past ~1700, three or four on a wide display. */
+  .sheet.team-sheet {
+    max-width: none;
+  }
+
+  .team-sheet .team-authors {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(30em, 1fr));
+    column-gap: var(--space-2xl);
+  }
+
+  .team-sheet .team-author {
+    display: block;
+    padding: 18px 0;
+  }
+
+  .team-sheet .ta-head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 0;
+  }
+
+  .team-sheet .ta-name {
+    font-size: 22px;
+  }
+
+  .team-sheet .ta-work {
+    max-width: 44em;
+  }
+
+  /* ---- 方法说明 ---- fills the content width, and its running text fills the
+     sheet: the narrow 34–36em sub-measures were what made every paragraph a short
+     column stranded in a wide sheet, so they are lifted here and each line runs
+     the full page width. Back link stays flush-left with the filled sheet. */
+  .sheet.info-sheet {
+    max-width: none;
+  }
+
+  .info-sheet .sheet-lede,
+  .info-sheet .sheet-section p,
+  .info-sheet .sheet-section ul,
+  .info-sheet .sheet-defs dd,
+  .info-sheet .sheet-note,
+  .info-sheet .sheet-source {
+    max-width: none;
+  }
+
+  body[data-page="settings"] .back-link {
+    display: flex;
+    width: 100%;
+    max-width: 76rem;
+    margin-inline: auto;
+    padding-left: 0;
+  }
+}

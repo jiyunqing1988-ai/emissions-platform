@@ -1,0 +1,13 @@
+# OS
+.DS_Store
+
+# Node
+node_modules/
+
+# Netlify local link state
+.netlify/
+
+# Local tooling / test artifacts (screenshots, CLI caches)
+output/
+.playwright-cli/
+.hallmark/

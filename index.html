@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>中国企业温室气体排放核算与报告因子库</title>
+    <link rel="icon" href="data:," />
+    <link rel="stylesheet" href="./styles.css?v=data-20260726-broadsheet-93" />
+  </head>
+  <body>
+    <header class="site-header" aria-label="站点标题栏">
+      <a id="homeLink" class="header-brand" href="./" aria-label="中国企业温室气体排放核算与报告因子库首页">
+        <img src="./assets/cpcd-mark.png?v=2" width="256" height="230" alt="" aria-hidden="true" />
+        <span class="brand-text">
+          <strong>中国企业温室气体排放核算与报告因子库</strong>
+          <small>China Corporate GHG Accounting and Reporting Emission Factor Database</small>
+        </span>
+      </a>
+      <nav class="header-nav" aria-label="主导航">
+        <button type="button" data-page="data">因子库</button>
+        <button type="button" data-page="方法说明">方法说明</button>
+        <button type="button" data-page="Q&A">Q&amp;A</button>
+        <button type="button" data-page="参考文献">参考文献</button>
+        <button type="button" data-page="建设团队">建设团队</button>
+      </nav>
+      <div class="header-account">
+        <button id="accountButton" type="button" aria-haspopup="menu" aria-expanded="false" aria-controls="accountPop">
+          <span id="accountAvatar" class="account-avatar hidden" aria-hidden="true"></span>
+          <span id="accountLabel">登录</span>
+        </button>
+        <div id="accountPop" class="account-pop hidden" role="menu" aria-label="账户菜单"></div>
+      </div>
+    </header>
+
+    <section id="homeView" class="home-view"></section>
+
+    <div id="appShell" class="app-shell hidden">
+      <aside class="sidebar" aria-label="因子目录">
+        <nav id="scopeSwitch" class="scope-switch" aria-label="排放范围切换"></nav>
+        <nav id="categoryStrip" class="category-strip" aria-label="因子类别"></nav>
+        <nav id="scopeNav" class="scope-nav" aria-label="范围与因子类别"></nav>
+
+      </aside>
+
+      <main class="main-area">
+        <section class="data-head" aria-label="因子数据概览">
+          <div>
+            <p id="currentCrumb" class="eyebrow">因子数据</p>
+            <h2 id="currentTitle">全部因子</h2>
+          </div>
+        </section>
+
+        <div id="searchDock" class="search-dock">
+          <div class="search-box">
+            <input id="searchInput" type="search" placeholder="搜索排放源、单位、来源..." autocomplete="off" aria-label="搜索因子" />
+            <button id="searchButton" type="button" aria-label="开始搜索">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5" /><path d="M15.8 15.8 20.5 20.5" /></svg>
+            </button>
+          </div>
+        </div>
+
+        <section id="dataView" class="view-panel">
+          <div id="activeFilters" class="active-filters hidden" aria-label="当前筛选"></div>
+          <div id="scope1UnitControl" class="unit-control hidden" aria-label="范围一活动数据单位"></div>
+          <div class="data-tools">
+            <div class="result-line"><strong id="resultCount">0</strong><span>条因子</span></div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead id="factorTableHead"></thead>
+              <tbody id="factorTable"></tbody>
+            </table>
+          </div>
+          <div id="loadMore" class="load-more hidden">
+            <button id="loadMoreButton" type="button">加载更多</button>
+            <span id="loadMoreHint"></span>
+          </div>
+        </section>
+
+        <section id="contentView" class="view-panel hidden">
+          <div id="contentPage"></div>
+        </section>
+      </main>
+    </div>
+
+    <dialog id="detailDialog">
+      <div class="dialog-head">
+        <div>
+          <p id="detailScope" class="eyebrow"></p>
+          <h3 id="detailTitle"></h3>
+        </div>
+        <button id="closeDialog" type="button" aria-label="关闭">×</button>
+      </div>
+      <div id="detailBody" class="detail-body"></div>
+    </dialog>
+
+    <dialog id="authDialog">
+      <form id="authForm" class="auth-dialog" method="dialog">
+        <div class="dialog-head">
+          <div>
+            <p class="eyebrow">Account</p>
+            <h3 id="authTitle">登录</h3>
+          </div>
+          <button id="closeAuthDialog" type="button" aria-label="关闭">×</button>
+        </div>
+        <div class="auth-body">
+          <p class="auth-note">当前为静态站点演示账号，用户名与密码仅保存在本浏览器，不会上传，也不具备真实的账号安全性。</p>
+          <label>
+            <span>用户名</span>
+            <input id="authName" type="text" autocomplete="username" required />
+          </label>
+          <label>
+            <span>密码</span>
+            <input id="authPassword" type="password" autocomplete="current-password" required />
+          </label>
+          <p id="authMessage" class="auth-message" role="status"></p>
+          <button id="authSubmit" type="submit">登录</button>
+          <p class="auth-switch">
+            <span id="authSwitchText">还没有账号？</span>
+            <button id="authSwitchButton" type="button">注册一个</button>
+          </p>
+        </div>
+      </form>
+    </dialog>
+
+    <nav id="tabBar" class="tab-bar" aria-label="主导航">
+      <button type="button" data-tab="home">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5" /><path d="M5.5 9.5V20h13V9.5" /></svg>
+        <span>首页</span>
+      </button>
+      <button type="button" data-tab="data">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16" /><path d="M4 12h16" /><path d="M4 18h10" /></svg>
+        <span>因子库</span>
+      </button>
+      <button type="button" data-tab="qa">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" /><path d="M9.5 9.2a2.6 2.6 0 1 1 3.2 2.5c-.5.2-.8.7-.8 1.2v.6" /><path d="M12 17h.01" /></svg>
+        <span>常见问题</span>
+      </button>
+      <button type="button" data-tab="me">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8.5" r="3.5" /><path d="M5 20c0-3.4 3.1-5.5 7-5.5s7 2.1 7 5.5" /></svg>
+        <span>我的</span>
+      </button>
+    </nav>
+
+    <script src="./app.js?v=data-20260726-broadsheet-93"></script>
+  </body>
+</html>

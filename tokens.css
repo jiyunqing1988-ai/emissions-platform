@@ -1,0 +1,114 @@
+/* Hallmark tokens · genre: modern-minimal · macrostructure: Workbench · theme: custom morandi grey-green */
+:root {
+  color-scheme: light;
+
+  --color-paper: oklch(96.8% 0.008 118);
+  --color-paper-2: oklch(94.2% 0.009 118);
+  --color-paper-3: oklch(90.4% 0.011 118);
+  --color-panel: oklch(98.5% 0.006 118);
+  --color-ink: oklch(20% 0.012 158);
+  --color-ink-2: oklch(36% 0.012 158);
+  --color-muted: oklch(50% 0.01 145);
+  --color-rule: oklch(84% 0.01 118);
+  --color-rule-strong: oklch(72% 0.013 118);
+  /* Accent shifted from teal-green (hue 168) to a muted blue in the logo/cover
+     family (hue 255): the green read as out of place next to the blue cover.
+     范围一 follows the accent, so it becomes blue too (see --mark-s1); 范围二
+     amber and 范围三 coral stay for warm contrast. */
+  --color-accent: oklch(46% 0.08 255);
+  --color-accent-2: oklch(55% 0.038 82);
+  --color-accent-3: oklch(57% 0.035 38);
+  --color-accent-ink: oklch(97% 0.006 118);
+  --color-focus: oklch(58% 0.13 255);
+  --color-header: oklch(34% 0.035 240);
+  --color-header-ink: oklch(97% 0.006 118);
+  --color-header-muted: oklch(88% 0.012 118);
+  --color-header-rule: oklch(88% 0.008 118 / 0.62);
+  --color-header-hover: oklch(88% 0.008 118 / 0.12);
+  --color-hero-copy: oklch(93% 0.008 118 / 0.9);
+  --color-hero-scrim: oklch(25% 0.025 238);
+  --color-shadow-soft: oklch(20% 0.01 158 / 0.12);
+  --color-shadow-faint: oklch(20% 0.01 158 / 0.08);
+  --color-danger: oklch(48% 0.12 34);
+
+  --font-display: "Songti SC", "Noto Serif SC", "Source Han Serif SC", serif;
+  --font-body: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "SFMono-Regular", "JetBrains Mono", ui-monospace, monospace;
+
+  --space-3xs: 0.125rem;
+  --space-2xs: 0.25rem;
+  --space-xs: 0.5rem;
+  --space-sm: 0.75rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2.5rem;
+  --space-2xl: 4rem;
+  --space-3xl: 6rem;
+  --space-4xl: 9rem;
+
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-md: 1.125rem;
+  --text-lg: 1.375rem;
+  --text-xl: 1.75rem;
+  --text-2xl: 2.25rem;
+  --text-3xl: 3rem;
+  --text-display: clamp(2.5rem, 4.2vw + 0.5rem, 4.75rem);
+  --text-display-s: clamp(2.25rem, 3vw + 0.4rem, 3.75rem);
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in: cubic-bezier(0.7, 0, 0.84, 0);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-micro: 120ms;
+  --dur-short: 220ms;
+  --dur-long: 420ms;
+
+  /* ---- Home broadsheet: measure ---- */
+  --edit-max: 1320px;
+  --read-max: 1040px;
+  --field-inset: max(2.5rem, calc((100vw - var(--edit-max)) / 2));
+  --field-pad: clamp(80px, 9vw, 150px);
+
+  /* ---- Home broadsheet: grounds ---- */
+  /* Sampled from cpcd-mark.png: #2c3e51, 66% of its pixels and all four corners.
+     The logo has no alpha channel, so matching the ground here is what makes the
+     mark sit on the page instead of reading as a pasted-on badge. */
+  --color-field-cover: oklch(35.69% 0.0405 250.3);
+  --color-field-ink: oklch(20% 0.012 158);
+  /* Closing-screen ground: was a saturated dark green (hue 168) that jarred with
+     the blue cover — now a dark blue in the same family. */
+  --color-field-plate: oklch(31% 0.05 255);
+
+  /* ---- Ink on dark grounds ---- */
+  --color-on-dark: oklch(97% 0.006 118);
+  --color-on-dark-2: oklch(86% 0.012 150);
+  --color-on-dark-3: oklch(78% 0.014 155);
+  --color-hairline-dark: oklch(90% 0.01 118 / 0.34);
+
+  /* --color-muted measures exactly 4.50:1 on paper-3 — never use it there. */
+  --color-muted-2: oklch(42% 0.012 158);
+
+  /* Scope triad lifted for dark grounds; same hues as the accent so the home page
+     and the factor table teach one scope colour. 范围一 is now blue (hue 255) to
+     match the accent; 范围二 amber and 范围三 coral keep the warm contrast. */
+  --mark-s1: oklch(72% 0.11 255);
+  --mark-s2: oklch(78% 0.07 82);
+  --mark-s3: oklch(64% 0.075 38);
+
+  /* Source ramp is a HUE WALK, not a lightness ramp, so the 3-4 record slivers
+     still clear 3:1 on --color-field-ink. */
+  --src-1: oklch(84% 0.07 168);
+  --src-2: oklch(78% 0.07 150);
+  --src-3: oklch(72% 0.07 128);
+  --src-4: oklch(66% 0.07 108);
+  --src-5: oklch(62% 0.07 92);
+  --src-6: oklch(70% 0.07 58);
+  --src-7: oklch(64% 0.075 38);
+  --src-8: oklch(54% 0.02 168);
+
+  --radius-card: 3px;
+  --radius-control: 3px;
+  --radius-pill: 999px;
+  --rule-thin: 1px;
+}
