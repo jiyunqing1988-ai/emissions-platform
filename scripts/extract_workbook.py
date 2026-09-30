@@ -308,6 +308,10 @@ def main():
         json.dumps(payload, ensure_ascii=False, indent=2),
         encoding="utf-8",
     )
+    (DATA_DIR / "202609201721-platform-data.js").write_text(
+        "window.PLATFORM_DATA = " + json.dumps(payload, ensure_ascii=False, separators=(",", ":")) + ";\n",
+        encoding="utf-8",
+    )
     download_target = ROOT / payload["metadata"]["downloadFile"]
     if source.resolve() != download_target.resolve():
         shutil.copyfile(source, download_target)

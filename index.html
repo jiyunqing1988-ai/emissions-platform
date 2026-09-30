@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <title>中国企业温室气体排放核算与报告因子库</title>
     <link rel="icon" href="data:," />
-    <link rel="stylesheet" href="./styles.css?v=data-20260726-broadsheet-93" />
+    <link rel="stylesheet" href="./styles.css?v=202609201721-portal" />
   </head>
-  <body>
+  <body data-view="portal">
     <header class="site-header" aria-label="站点标题栏">
       <a id="homeLink" class="header-brand" href="./" aria-label="中国企业温室气体排放核算与报告因子库首页">
         <img src="./assets/cpcd-mark.png?v=2" width="256" height="230" alt="" aria-hidden="true" />
@@ -15,8 +15,13 @@
           <strong>中国企业温室气体排放核算与报告因子库</strong>
           <small>China Corporate GHG Accounting and Reporting Emission Factor Database</small>
         </span>
+        <span class="brand-text portal-brand-text">
+          <strong>中国产品全生命周期温室气体排放系数库</strong>
+          <small>CPCD · China Products Carbon Footprint Factors Database</small>
+        </span>
       </a>
       <nav class="header-nav" aria-label="主导航">
+        <button id="portalLink" type="button">选择数据库</button>
         <button type="button" data-page="data">因子库</button>
         <button type="button" data-page="方法说明">方法说明</button>
         <button type="button" data-page="Q&A">Q&amp;A</button>
@@ -32,7 +37,36 @@
       </div>
     </header>
 
-    <section id="homeView" class="home-view"></section>
+    <main id="portalView" class="portal-view">
+      <div class="portal-content">
+        <div class="portal-heading">
+          <p class="portal-kicker">CPCD / DATABASES</p>
+          <h1>选择数据库</h1>
+          <p>产品碳足迹与企业温室气体核算数据，分别进入对应的数据库查询。</p>
+        </div>
+        <div class="portal-options" aria-label="数据库入口">
+          <a class="portal-option" href="https://lca.cityghg.com/">
+            <span class="portal-option-index">01 / PRODUCT</span>
+            <span class="portal-option-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v7c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 12v7c0 1.7 3.6 3 8 3s8-1.3 8-3v-7"/></svg>
+            </span>
+            <span class="portal-option-title">产品数据库 <span aria-hidden="true">↗</span></span>
+            <span class="portal-option-desc">产品碳足迹与生命周期排放系数</span>
+          </a>
+          <a id="enterpriseEntry" class="portal-option" href="#enterprise">
+            <span class="portal-option-index">02 / ENTERPRISE</span>
+            <span class="portal-option-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M4 21V9l8-5v17M12 10h8v11M2 21h20M7 11h2M7 15h2M15 13h2M15 17h2"/></svg>
+            </span>
+            <span class="portal-option-title">企业数据库 <span aria-hidden="true">→</span></span>
+            <span class="portal-option-desc">企业温室气体排放核算与报告因子</span>
+          </a>
+        </div>
+        <p class="portal-footnote">中国企业温室气体排放核算与报告因子库</p>
+      </div>
+    </main>
+
+    <section id="homeView" class="home-view hidden"></section>
 
     <div id="appShell" class="app-shell hidden">
       <aside class="sidebar" aria-label="因子目录">
@@ -124,6 +158,10 @@
     </dialog>
 
     <nav id="tabBar" class="tab-bar" aria-label="主导航">
+      <button type="button" data-tab="portal">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h8v8H3zM13 4h8v8h-8zM3 14h8v7H3zM13 14h8v7h-8z" /></svg>
+        <span>数据库</span>
+      </button>
       <button type="button" data-tab="home">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5" /><path d="M5.5 9.5V20h13V9.5" /></svg>
         <span>首页</span>
@@ -142,6 +180,7 @@
       </button>
     </nav>
 
-    <script src="./app.js?v=data-20260726-broadsheet-93"></script>
+    <script src="./data/202609201721-platform-data.js"></script>
+    <script src="./app.js?v=202609201721-portal"></script>
   </body>
 </html>

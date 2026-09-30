@@ -15,9 +15,11 @@ const DEFAULT_PAGE_SIZE = 50;
 const pageSize = () => Number(state.settings?.pageSize) || DEFAULT_PAGE_SIZE;
 
 const els = {
+  portalView: document.querySelector("#portalView"),
   homeView: document.querySelector("#homeView"),
   appShell: document.querySelector("#appShell"),
   homeLink: document.querySelector("#homeLink"),
+  portalLink: document.querySelector("#portalLink"),
   scopeNav: document.querySelector("#scopeNav"),
   searchInput: document.querySelector("#searchInput"),
   searchButton: document.querySelector("#searchButton"),
@@ -420,13 +422,13 @@ function renderAccountHubPage() {
   `;
 }
 
-const TAB_FOR_PAGE = { home: "home", data: "data", "Q&A": "qa", me: "me", profile: "me", settings: "me" };
+const TAB_FOR_PAGE = { portal: "portal", home: "home", data: "data", "Q&A": "qa", me: "me", profile: "me", settings: "me" };
 
 function renderTabBar() {
   const active = TAB_FOR_PAGE[state.activePage] || null;
   // Lets the handheld layout hide library-only chrome (filter chips, search, back link)
   // on pages that aren't the factor list.
-  document.body.dataset.view = state.activePage === "data" ? "data" : state.activePage === "home" ? "home" : "content";
+  document.body.dataset.view = ["portal", "home", "data"].includes(state.activePage) ? state.activePage : "content";
   els.tabBar.querySelectorAll("button[data-tab]").forEach((button) => {
     const on = button.dataset.tab === active;
     button.classList.toggle("active", on);
@@ -1240,6 +1242,7 @@ function renderHomePage() {
         <div class="hp-mast">
           <img src="./assets/cpcd-mark.png?v=2" width="256" height="230" alt="" aria-hidden="true" />
           <strong>企业因子库</strong>
+          <a class="hp-switch-database" href="#portal">选择数据库</a>
           <span class="hp-mast-ver">版本 ${escapeHtml(formatVersion(meta.version))}</span>
         </div>
         <div class="hp-plate-img" role="img" aria-label="工业企业排放场景"></div>
@@ -1908,6 +1911,7 @@ function showAccountPage(page) {
   scrollViewToTop();
   syncHeaderNav(page);
   state.activePage = page;
+  els.portalView.classList.add("hidden");
   els.homeView.classList.add("hidden");
   els.appShell.classList.remove("hidden");
   els.dataView.classList.add("hidden");
@@ -1920,10 +1924,24 @@ function showAccountPage(page) {
   renderTabBar();
 }
 
+function showPortalView() {
+  releaseHomeTabs();
+  scrollViewToTop();
+  state.activePage = "portal";
+  document.body.dataset.page = "portal";
+  document.title = "选择数据库 · CPCD";
+  els.portalView.classList.remove("hidden");
+  els.homeView.classList.add("hidden");
+  els.appShell.classList.add("hidden");
+  renderTabBar();
+}
+
 function showHomeView() {
   scrollViewToTop();
   syncHeaderNav("home");
   state.activePage = "home";
+  document.title = "中国企业温室气体排放核算与报告因子库";
+  els.portalView.classList.add("hidden");
   els.homeView.classList.remove("hidden");
   els.appShell.classList.add("hidden");
   els.homeView.innerHTML = renderHomePage();
@@ -1937,6 +1955,7 @@ function showDataView() {
   syncHeaderNav("data");
   document.body.dataset.page = "data";
   state.activePage = "data";
+  els.portalView.classList.add("hidden");
   els.homeView.classList.add("hidden");
   els.appShell.classList.remove("hidden");
   els.dataView.classList.remove("hidden");
@@ -1950,6 +1969,7 @@ function showContentPage(page) {
   releaseHomeTabs();
   scrollViewToTop();
   state.activePage = page;
+  els.portalView.classList.add("hidden");
   els.homeView.classList.add("hidden");
   els.appShell.classList.remove("hidden");
   els.dataView.classList.add("hidden");
@@ -2010,7 +2030,15 @@ function showDetail(record) {
 function bindEvents() {
   els.homeLink.addEventListener("click", (event) => {
     event.preventDefault();
-    showHomeView();
+    if (state.activePage !== "portal") showHomeView();
+  });
+  els.portalLink.addEventListener("click", () => {
+    if (window.location.hash === "#portal") showPortalView();
+    else window.location.hash = "portal";
+  });
+  window.addEventListener("hashchange", () => {
+    if (window.location.hash === "#portal") showPortalView();
+    else if (window.location.hash === "#enterprise") showHomeView();
   });
   els.homeView.addEventListener("click", (event) => {
     const pageButton = event.target.closest("button[data-page]");
@@ -2145,6 +2173,11 @@ function bindEvents() {
     const button = event.target.closest("button[data-tab]");
     if (!button) return;
     const tab = button.dataset.tab;
+    if (tab === "portal") {
+      if (window.location.hash === "#portal") showPortalView();
+      else window.location.hash = "portal";
+      return;
+    }
     if (tab === "home") return showHomeView();
     if (tab === "data") {
       state.favoritesOnly = false;
@@ -2203,9 +2236,10 @@ function applySettings() {
 async function init() {
   state.settings = storedSettings();
   applySettings();
-  const response = await fetch("./data/platform-data.json");
-  state.data = await response.json();
-  showHomeView();
+  state.data = window.PLATFORM_DATA;
+  if (!state.data) throw new Error("因子数据未加载，请检查 data/202609201721-platform-data.js");
+  if (window.location.hash === "#enterprise") showHomeView();
+  else showPortalView();
   updateAuthUi();
   bindEvents();
 }

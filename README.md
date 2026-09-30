@@ -27,7 +27,7 @@
 
 ## 它是什么
 
-平台的全部数据由一份 Excel 工作簿离线抽取成一个 JSON 文件（`data/platform-data.json`），前端是一个**没有任何框架、没有打包步骤**的单页应用：一个 `index.html` + 一份 `styles.css` + 一份 `app.js`，直接用浏览器打开就能跑。
+平台的全部数据由一份 Excel 工作簿离线抽取成 JSON 和对应的本地脚本数据。前端是一个**没有任何框架、没有打包步骤**的单页应用，可通过本地服务器预览，也可直接用浏览器打开 `index.html`。
 
 因子按 GHG Protocol 的三个范围组织：
 
@@ -40,6 +40,7 @@
 
 ## 功能
 
+- **数据库入口** — 封面提供产品数据库和企业数据库两个入口；产品数据库跳转到 `https://lca.cityghg.com/`，企业数据库进入本项目首页。
 - **因子库工作台** — 626 条因子的表格视图，支持关键词搜索、按范围/类别筛选、范围一活动数据单位切换、分页加载；点开任一条查看数值、单位、各气体分量、系统边界、计算方法与数据来源。
 - **五个内容页** — 因子库、方法说明、Q&A（40 条）、参考文献（378 条）、建设团队。
 - **首页封面** — 一屏一版、随浏览器高度自适应的编辑风封面，含范围三色数据阵与类别索引。
@@ -62,11 +63,12 @@ emissions-platform/
 ├── tokens.css              # 设计 Token：色彩 / 间距 / 字号（改配色只动这里）
 ├── app.js                  # 全部前端逻辑（渲染、筛选、搜索、路由、账户）
 ├── data/
-│   └── platform-data.json  # 由 Excel 抽取的全部数据（~1 MB，见下方数据模型）
+│   ├── platform-data.json              # 由 Excel 抽取的源数据（见下方数据模型）
+│   └── 202609201721-platform-data.js   # 同步生成，供 file:// 直接打开时加载
 ├── assets/                 # 图片资源（logo、封面大图）
 ├── downloads/              # 可供下载的源 Excel 文件
 ├── scripts/
-│   └── extract_workbook.py # Excel → platform-data.json 的抽取脚本
+│   └── extract_workbook.py # Excel → JSON / JS 的抽取脚本
 ├── netlify.toml            # Netlify 托管配置（publish=".", 缓存头)
 └── README.md
 ```
@@ -130,7 +132,7 @@ python3 -m http.server 5174
 python3 scripts/extract_workbook.py
 ```
 
-脚本会读取源 Excel，重新生成 `data/platform-data.json`，并把源文件复制到 `downloads/`。源路径通过环境变量覆盖：
+脚本会读取源 Excel，同时重新生成 `data/platform-data.json` 和 `data/202609201721-platform-data.js`，并把源文件复制到 `downloads/`。源路径通过环境变量覆盖：
 
 ```bash
 SOURCE_XLSX=/path/to/新版因子库.xlsx python3 scripts/extract_workbook.py
